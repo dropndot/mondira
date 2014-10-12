@@ -1,6 +1,7 @@
 # Mondira
 
-A WordPress Theme development framework.
+A WordPress Theme development framework by Dropndot Limited (http://www.dropndot.com).
+Developer Documentation can be found on (http://framework.mondira.com/) 
 
 ## WordPress Theme
 
