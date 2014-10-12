@@ -1,0 +1,71 @@
+
+/* slider root */
+.slider { 
+    background: #0074a2; 
+    width:160px; 
+    height:7px; 
+    cursor:pointer; 
+    position: relative; 
+    float:left;
+    margin-top: 2px;
+	border-radius: 4px;
+}
+
+/* drag handle */
+.handle { 
+    background: #fff; 
+    height:13px; 
+	border-radius: 10px;
+    position:absolute; 
+    top:-5px; 
+    width:12px; 
+    cursor:move; 
+	border: 2px solid #0074a2;
+}
+
+/* input field */
+.range { 
+    font-size:10px; 
+    border:0; 
+    background:none; 
+    width: 30px; 
+    margin:-5px 0 10px 0; 
+    float:left;
+    color:#fff;
+    text-align:center;
+    -moz-border-radius:2px; 
+    -webkit-border-radius:2px;     
+}
+
+/* input field while focused */
+.range{ 
+    background: #FFF;
+    border: 1px solid #DFDFDF;
+    color: #000;
+    margin-left: 10px;
+    margin-right: 5px;
+}
+
+.avoid_br{
+    margin-top: -5px;
+    float: left;
+}
+
+
+/* vertical version */
+.vertical .slider {
+    background:url(../images/small-vertical.png) no-repeat  -4px -17px; 
+    height:94px;
+    width: 5px;
+    margin:5px 13px 0 0;
+}
+
+.vertical .handle { 
+    background:transparent url(../images/small-vertical.png) no-repeat scroll -1px -2px;     
+    top:0;
+    margin-left:-2px;
+}
+
+.vertical .range {
+    margin:-13px 13px 0 -30px;        
+}
