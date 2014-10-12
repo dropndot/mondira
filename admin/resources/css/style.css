@@ -1,0 +1,781 @@
+/*
+-----------------------------------------------------------------------------------
+    Option interface or mondira settings interface css start here
+-----------------------------------------------------------------------------------
+*/
+body * {
+	outline: none !important;
+}
+
+#tabs ul{
+    overflow: hidden;
+}  
+
+#tabs ul li{
+    float: left;
+    padding: 5px 10px;
+    background-color: #e2e2e2;
+    color: #555;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+#tabs ul li a{
+    color: #555;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+  
+.mondira-media-upload-button, 
+.mondira-media-preview{
+    margin-top: 10px;
+}  
+
+.mondira-media-preview{
+    float: left;
+}
+
+#mondira-docs-tabs, 
+#mondira-options-tabs {
+    border: 5px solid #0074a2;
+    background-color: #fff;   
+    margin:10px 0 20px;   
+    padding: 0;
+    width: 98%;       
+    max-width: 980px;
+    float: left;
+}
+
+#mondira-docs-tabs img {
+    max-width: 100%;    
+}
+
+.ibutton-container {
+    margin-bottom: 6px !important;
+}
+
+.mondira-docs-page label, 
+.mondira-docs-tabs label{
+    font-weight: normal;
+}
+
+.mondira-docs-page th label, 
+.mondira-docs-tabs th label {
+    line-height: 18px; 
+	font-size: 13px;
+	font-weight: 150;
+}
+
+.mondira-docs-page .form-table th, 
+.mondira-docs-tabs .form-table th{
+    padding: 10px 0 !important;
+}
+
+.mondira-docs-tabs {
+    display: none;
+}
+
+.mondira-docs-page .ui-tabs { 
+    zoom: 1; 
+    position:relative;
+}
+
+.ui-tabs .mondira-docs-tabs {
+    display: block;
+    padding: 0;
+    margin: 0;
+    background: #e2e2e2; 
+    background: #0074a2; 
+    border-right: 0px solid #aaa;   
+}
+
+.mondira-docs-page .mondira-docs-tabs li a:first-child {  
+
+}
+
+.mondira-docs-page .ui-tabs .ui-tabs-nav { 
+    list-style: none; 
+    position: relative; 
+    float: left; 
+    width: 100%;
+    word-wrap: break-word;
+    overflow: hidden;
+}
+
+.mondira-docs-page .ui-tabs .ui-tabs-nav li { 
+    position: relative; 
+    float: left;
+    display: block;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    border-bottom: 0px solid #e2e2e2; 
+}
+
+.mondira-docs-page .ui-tabs .ui-tabs-nav li a { 
+    float: left; 
+    text-decoration: none;
+    display: block;
+    width: auto;
+    padding: 8px 10px;
+    
+    color: #fff;                   
+    text-shadow: 0 1px 0 #fff;        
+}
+
+.mondira-docs-page .ui-tabs .ui-tabs-nav li.ui-tabs-selected a, 
+.mondira-docs-page .ui-tabs .ui-tabs-nav li.ui-tabs-active a,
+.mondira-docs-page .ui-tabs .ui-tabs-nav li.ui-tabs-active a:hover,
+.mondira-docs-page .ui-tabs .ui-tabs-nav li.ui-tabs-selected a:hover,
+.mondira-docs-page .ui-tabs .ui-tabs-nav li a:hover { 
+    background: #fff;
+    color: #d54e45;
+    color: #0074a2;
+    width: auto;
+    font-size: 13px;
+    padding: 30px 20px 10px 20px;
+	text-transform: uppercase;	
+	border-top-left-radius: 10px;
+    border-top-right-radius: 0px;
+}
+
+.mondira-docs-page.ui-tabs-nav li.ui-state-disabled a, 
+.mondira-docs-page.ui-tabs-nav li.ui-state-processing a { 
+    cursor: text;
+    font-size: 13px;
+    padding: 30px 20px 10px 20px;
+	text-transform: uppercase;
+	
+	border-top-left-radius: 10px;
+    border-top-right-radius: 0px;
+}
+
+.mondira-docs-page .ui-tabs .ui-tabs-nav li a, 
+.mondira-docs-page .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a { 
+    cursor: pointer; 
+    font-size: 13px;
+    padding: 30px 20px 10px 20px;
+	text-transform: uppercase;	
+	border-top-left-radius: 10px;
+    border-top-right-radius: 0px;
+}
+
+.mondira-docs-page .ui-tabs .ui-tabs-nav li.ui-state-hover a {
+    background-color: #FFF;
+    color: #555;	
+	border-top-left-radius: 10px;
+    border-top-right-radius: 0px;
+}
+.mondira-docs-page .ui-tabs .ui-tabs-nav li a, 
+.mondira-docs-page .ui-tabs.ui-tabs-collapsible .ui-tabs-nav li.ui-tabs-selected a,
+.mondira-docs-page .ui-tabs .ui-tabs-nav li.ui-state-hover a {
+	-webkit-transition: background 0.50s ease-in-out;
+	-moz-transition: background 0.50s ease-in-out;
+	-ms-transition: background 0.50s ease-in-out;
+	-o-transition: background 0.50s ease-in-out;
+	transition: background 0.50s ease-in-out;
+}
+
+.mondira-docs-page .ui-tabs .ui-tabs-panel { 
+    display: block;
+    min-height: 400px;
+}
+
+.mondira-docs-page .ui-tabs .ui-tabs-hide { 
+    display: none !important; 
+}
+
+.mondira-docs-page .mondira-docs-tabs li.ui-tabs-selected span {
+    position: absolute;
+    left: -1px;
+    top: 13px;
+    height: 9px;
+    width: 8px;       
+}
+
+.mondira-docs-page .block, 
+.mondira-docs-tabs .block {
+    display: block;  
+    padding: 20px;      
+    float: left; 
+    width: 100% !important;  
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;   
+    box-sizing: border-box;        
+}
+
+.mondira-docs-tabs .block{
+    padding: 0;
+}
+
+.theme-options-page {
+    margin: 0;
+}
+     
+#mondira-docs-tabs .block{
+    max-width: 1000px;     
+}
+
+#mondira-docs-tabs h2, #mondira-options-tabs h2 {
+    margin-bottom: 10px;
+    border-bottom: 2px solid #0074a2;
+	padding-bottom: 10px;
+}
+#mondira-docs-tabs h3, #mondira-options-tabs h3 {
+    border-bottom: 2px solid #0074a2;
+    margin: 0 0 15px 0;
+    padding-bottom: 10px;
+    font-size: 14px;
+}
+#mondira-docs-tabs h4, #mondira-options-tabs h4 {
+    font-size: 13px;
+}
+#mondira-docs-tabs, #mondira-options-tabs {
+    font-size: 13px !important;
+    color: #555;
+	border-top-left-radius: 20px;
+    border-top-right-radius: 0px;
+}
+.mondira-docs-page p {
+    font-size: 13px;
+    color: #555;
+    padding-bottom: 20px;
+    margin: 0;
+}
+.mondira-docs-page .block ul, .mondira-docs-page .block ol {
+    font-size: 13px !important;
+    padding-bottom: 20px;
+}
+.mondira-docs-page .block ul li{
+    list-style: disc;
+}
+.mondira-docs-page .block li {
+    padding-bottom: 0px;
+    margin-left: 16px;
+}
+.mondira-docs-page code {
+    background-color: #e2e2e2;
+    color: #000;
+}
+.mondira-docs-page pre {
+    font-size: 13px;
+    padding: 0;
+    margin: 0;
+    line-height: 18px;
+    overflow: auto;
+    overflow-Y: hidden;
+    padding-top: 18px;
+    background: #e2e2e2;
+    border-bottom: 1px solid #e2e2e2;
+    margin-bottom: 20px;
+    color: #000;
+    white-space:pre-wrap;
+    word-wrap:break-word;
+}
+.mondira-docs-page pre code {
+    padding: 0 18px 18px 18px;
+    display: block;
+    background: url(../images/pre_bg.gif) repeat left top;
+}      
+
+.mondira-media-preview {
+    overflow: hidden;
+    position: relative;
+}
+.mondira-media-preview img {
+    margin: auto; 
+	position: absolute; 
+	top: 0; 
+	left: 0; 
+	bottom: 0; 
+	right: 0;    
+}
+
+.regular-text{
+    width:277px;
+    float: left;
+    margin-right: 10px;
+    margin-bottom: 5px;
+}
+
+select.regular-text {
+    margin-bottom: 5px;
+}
+
+td.empty {
+    padding: 0;
+}
+textarea.regular-text {
+    width: 100%;
+    min-height: 150px;
+    margin-bottom: 5px;
+}  
+.medium{
+    width:277px;
+    float: left;
+}
+.large{
+    width:400px;
+    float: left;
+}
+
+
+textarea.large{
+    width:100%;  
+    min-height: 150px;
+    margin-bottom: 5px;
+}
+
+input.regular-text.range{
+    width: 30px;
+    margin-bottom: 0;
+}
+
+#mondira-options-tabs span.description{
+    font-size: 12px;
+    line-height: 18px;   
+	display: block;
+	border: 0px solid #f00;
+	clear: both;
+	overflow: hidden;
+	padding-top: 5px;
+}
+.wp-picker-container, .regular-select{
+    float: left;
+}
+
+#mondira-options-tabs .regular-select {
+	min-width: 200px;
+	background-color: #ffffff;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	-moz-background-clip: padding;
+	-webkit-background-clip: padding-box;
+	background-clip: padding-box;
+	-webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	box-shadow: none !important;
+	display: block;
+	overflow: hidden;
+	white-space: nowrap;
+	position: relative;
+	height: 33px !important;
+	line-height: 33px !important;
+	padding: 4px 4px 6px 8px !important;
+	color: #444444;
+	text-decoration: none;
+	cursor: pointer;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	-webkit-transition: 0.1s linear all;
+	-moz-transition: 0.1s linear all;
+	-ms-transition: 0.1s linear all;
+	-o-transition: 0.1s linear all;
+	transition: 0.1s linear all;
+}
+
+
+#mondira-options-tabs .chosen-container {
+	max-width: 300px !important;
+}
+
+#mondira-options-tabs .regular-text.range {
+	height: 28px !important;
+	line-height: 28px !important;
+	padding: 0px !important;
+}
+
+#mondira-options-tabs .regular-text {
+	height: 33px !important;
+	line-height: 33px !important;
+	padding: 4px 4px 6px 8px !important;
+	
+	-webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	box-shadow: none !important;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	-webkit-transition: 0.1s linear all;
+	-moz-transition: 0.1s linear all;
+	-ms-transition: 0.1s linear all;
+	-o-transition: 0.1s linear all;
+	transition: 0.1s linear all;
+}
+
+#mondira-options-tabs .form-table{
+    margin-bottom: 10px !important;
+}
+
+#skin-list {
+    overflow: hidden;
+}
+
+#skin-list ul {
+    overflow: hidden; display: block; list-style-type: none; float: left; border: 1px solid #000; padding: 0; margin: 0;
+    margin-bottom: 5px;
+    margin-right: 10px;
+}
+
+#skin-list ul li {
+    float: left; margin: 0 10px; list-style-type: none; width: 60px; text-align: left;
+}
+
+#skin-list ul li.mr0 {
+    margin-right: 0;
+    width: 50px;
+}
+
+#skin-list span {
+    line-height: 50px;
+}
+
+#skin-list div {
+    width: 50px; height: 50px; 
+}
+
+.avoid_br {
+    display: block;
+    clear: both;
+}
+
+.image-upload img {
+    max-width: 100%;
+}
+
+.box-sizing {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;   
+    box-sizing: border-box;        
+}
+
+.clearfix:before, 
+.clearfix:after {
+    content:"";
+    display:table;
+}
+
+.clearfix:after, .clearfix {
+    clear:both;
+}
+
+.icon32-posts-portfoliorx{
+    background: #e2e2e2 !important;
+}  
+  
+#update-nag, .update-nag{
+    margin-left: 0;
+} 
+
+#textarea_like {
+    -moz-appearance: textfield-multiline;
+    -webkit-appearance: textarea;
+    border: 2px solid #000;
+    font: medium -moz-fixed;
+    font: -webkit-small-control;
+    height: 228px;
+    overflow: auto;
+    padding: 10px;
+    resize: both;
+    width: 100%;
+}
+
+#mondira-options-tabs .form-table th .slider,
+#mondira-options-tabs .form-table td .slider {
+	margin-bottom: 13px;
+}
+
+#mondira-options-tabs .form-table td .tmce-active {
+	margin-bottom: 5px;
+}
+
+#mondira-options-tabs .form-table th,
+#mondira-options-tabs .form-table td {
+	padding: 10px;
+}
+
+/*
+-----------------------------------------------------------------------------------
+    Theme General Shortcode WP Editor CSS
+-----------------------------------------------------------------------------------
+*/
+#mondira-shortcode-generator input[type="text"], 
+#mondira-shortcode-generator textarea, 
+#mondira-shortcode-generator select { 
+	padding: 10px; 
+	font-family: Arial, Helvetica, sans-serif;
+	color: #555;
+}
+
+#mondira-shortcode-generator select {
+	height: 32px;
+	padding: 0 5px; 
+}
+
+#mondira-shortcode-generator input.wp-color-picker {
+	display: inline-block;
+	float: right !important;
+	width: 75px !important;
+	margin: 0px !important;
+	padding: 3px 10px !important;
+	margin-left: 5px !important;
+}
+
+#mondira-shortcode-generator input[type="text"], 
+#mondira-shortcode-generator textarea {
+	width:100%;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-o-box-sizing: border-box;
+}
+
+#mondira-shortcode-generator input[type="checkbox"], 
+#mondira-shortcode-generator input[type="radio"] {
+	margin-bottom: -6px;
+}
+
+#mondira-shortcode-generator div.label {
+	display: inline-block;
+	width: 30%;
+	float: left;
+	margin: 5px 0 0px 0px;
+}
+
+#mondira-shortcode-generator div.content {
+	display: inline-block;
+	width: 69%;
+}
+
+#mondira-shortcode-generator div.clear {
+	margin: 10px 0px;
+	border-bottom: 1px solid #e5e5e5;
+	clear: both;
+}
+
+#mondira-shortcodes-chosen {
+	margin-bottom: 0px !important;
+}
+
+div.shortcode-options p.description {
+	margin: 0px;
+	display: block;
+	overflow: hidden;
+	clear: both;
+}
+
+div.clear.no-border {
+	margin: 0px!important;
+	border: none!important;
+}
+
+.shortcode-options {
+	display: none;
+}
+
+.shortcode-options label {
+	display: inline;
+	margin-right: 3px;
+	min-width: 0px!important;
+}
+
+.postbox-container .chosen-container {
+	max-width: 200px;
+}
+
+#mondira-options-tabs .chosen-container-single .chosen-drop {
+	max-height: 300px;
+	overflow: scroll;
+}
+
+#mondira-options-tabs select[multiple="multiple"] {
+	min-height: 92px !important;
+}
+
+div[data-type="radios"] label, div[data-type="direct_to_editor"] label {
+	display: inline;
+}
+
+div[data-type="radios"] .content, div[data-type="checkbox"] .content {
+	margin: 7px 0px;
+}
+
+.description{margin-top:-.5em; }
+.description{ margin: 3px 0 0 0; color: #666; font-style: italic; }
+
+
+#mondira-shortcode-generator .hr {
+	width: 100%;
+	margin: 10px 0 20px 0px;
+	border-bottom: 1px solid #e5e5e5;
+}
+
+#wp-content-media-buttons a.mondira-shortcode-generator {
+	background-color: #114C7F !important;
+	box-shadow: none !important;
+}
+
+#wp-content-media-buttons a.mondira-shortcode-generator:hover {
+	background-color: #0D3D63 !important;
+}
+
+#mondira-insert-shortcode {
+	line-height: 19px !important;
+	height: 19px !important;
+}
+
+#mondira-options-tabs .button-primary,
+#mondira-shortcode-generator .btn {
+	cursor: pointer;
+	background-color: #0074a2;
+	padding: 10px !important;
+	color: #fff!important;
+	font-size: 11px;
+	line-height: normal;
+	-webkit-border-radius: 2px;
+	-moz-border-radius: 2px;
+	border-radius: 2px;
+	-webkit-transition: 0.1s linear all;
+	-moz-transition: 0.1s linear all;
+	-ms-transition: 0.1s linear all;
+	-o-transition: 0.1s linear all;
+	transition: 0.1s linear all;
+	margin:20px 0px;
+    text-decoration: none;
+	display: block;
+	text-align: center;
+	text-transform: uppercase;
+	font-weight: bold;
+	box-shadow: none !important;
+	line-height: 6px;
+}
+
+#mondira-shortcode-generator .btn.blue {
+	background-color: #0074a2;
+}
+
+#mondira-options-tabs .button-primary:hover,
+#mondira-shortcode-generator .btn:hover {
+	color: #fff;
+	background-position: 0 -15px;
+	background-color: #0D3D63;
+	text-decoration: none;
+}
+
+#shortcode-generator option[disabled=disabled] {
+	background: #0074a2;
+	font-weight: bold;
+	color: #FFF;
+	margin-top: 10px;
+}
+
+#mondira-shortcode-generator .shortcode-content {
+	padding-bottom: 0px;
+}
+
+#mondira-shortcode-generator .shortcode_code {
+	display:none;
+}
+
+#mondira-shortcode-generator label#option-label {
+	display: block;
+	font-weight: bold;	
+}
+
+#shortcode-content textarea#shortcode_content {
+	height: 180px;
+	font-size: 12px;
+	line-height: 18px;
+	font-family: Arial, Helvetica, sans-serif;
+	-webkit-transition: 0.2s linear all;
+	-moz-transition: 0.2s linear all;
+	-ms-transition: 0.2s linear all;
+	-o-transition: 0.2s linear all;
+	transition: 0.2s linear all;
+}
+
+#mondira-shortcode-generator .shortcode-content input[type="text"], 
+#mondira-shortcode-generator .shortcode-content textarea {
+	-webkit-transition: 0.2s linear all;
+	-moz-transition: 0.2s linear all;
+	-ms-transition: 0.2s linear all;
+	-o-transition: 0.2s linear all;
+	transition: 0.2s linear all;
+}
+
+#shortcode-content textarea#shortcode_content:focus, 
+#mondira-shortcode-generator .shortcode-content input[type="text"]:focus, 
+#mondira-shortcode-generator .shortcode-content textarea:focus {
+	border-color: #0074a2 !important;
+}
+
+#shortcode-content {
+	display: none;
+}
+
+#mondira-shortcode-generator {
+	width: 680px;
+	position: relative;
+	margin: 55px auto 20px auto;
+	padding: 20px;
+	min-height: 500px;
+	height: auto;
+	background-color: #fff;
+	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
+}
+
+#mondira-shortcode-header {
+	padding: 20px;
+	text-shadow: none !important;
+	margin: -20px -20px 20px -20px;
+	background-color: #0074a2;
+	color: #fff;
+}
+
+#mondira-shortcode-generator select[multiple="multiple"] {
+	height: 93px !important;
+}
+
+.button.mondira-shortcode-generator, .ui-buttonset .ui-state-active {
+	background-color: #1990DC !important;
+    background-image: none!important;
+    padding-left: 10px!important;
+    background-repeat: repeat-x;
+    border-color: #085eb8!important;
+    color: #FFFFFF !important;
+    box-shadow: 0 1px 0 rgba(120, 200, 230, 0.5) inset, 0 1px 0 rgba(0, 0, 0, 0.15);
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25)!important;
+}
+
+.ui-button {
+	background-image: none!important;
+	background: none repeat scroll 0 0 #F7F7F7!important;
+    border-color: #CCCCCC;
+    box-shadow: 0 1px 0 #FFFFFF inset, 0 1px 0 rgba(0, 0, 0, 0.08);
+    color: #555555;
+    vertical-align: top;
+}
+
+body .button.mondira-shortcode-generator:hover {
+	background-color: #1884c9!Important;
+	border-color: #00448b!important;
+}
+
+.mfp-zoom-in {
+	z-index: 999999 !important;
+}
+
+.mfp-close-btn-in .mfp-close {
+	color: #fff !important;
+	right: 20px !important;
+	top: 20px !important;
+	height: 34px;
+	line-height: 32px;
+	width: 34px;
+	opacity: 1 !important;
+	border: 1px solid rgba(255,255,255,0.5);
+	border-radius: 4px;
+}
