@@ -779,3 +779,27 @@ body .button.mondira-shortcode-generator:hover {
 	border: 1px solid rgba(255,255,255,0.5);
 	border-radius: 4px;
 }
+
+.mondiraCSSEditor,
+.mondiraHTMLEditor,
+.mondiraJSEditor {
+	display: none;
+}
+
+pre#html,
+pre#js,
+pre#css {
+	padding: 0px !important;
+	border-color: #0074a2 !important;
+	background-color: #ffc !important;
+	margin: 0px !important;
+}
+
+.code-editor-wrapper {
+	position: relative;
+	display: block;
+	border: 1px solid #fff;
+	overflow: hidden;
+	padding: 0px;
+	margin: 0px;
+}

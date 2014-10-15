@@ -130,6 +130,61 @@ if(!class_exists('MondiraThemeHelper')){
                 $output.=$attr[ 'value' ];
                 $output.='</textarea>';
             }
+			
+			$field_id = $attr['id'];
+			$field_class = $attr['class'];
+			$editor_css = $editor_html = $editor_js = false;
+			
+			$mondiraCSSEditor   = 'mondiraCSSEditor';
+			$mondiraHTMLEditor   = 'mondiraHTMLEditor';
+			$mondiraJSEditor   = 'mondiraJSEditor';
+			
+			$pos = strpos($field_class, $mondiraCSSEditor);
+			if ( $pos === false ) {
+				$pos = strpos($field_class, $mondiraHTMLEditor);
+				if ( $pos === false ) {
+					$pos = strpos($field_class, $mondiraJSEditor);
+					if ( $pos === false ) {
+						$editor_css = $editor_html = $editor_js = false;
+					} else {
+						$editor_js = true;
+					}
+				} else {
+					$editor_html = true;
+				}
+			} else {
+				$editor_css = true;
+			}
+
+			
+			if ( $editor_css ) {
+				$output.='
+				<div class="code-editor-wrapper">
+					<div class="window css">
+					  <pre id="css" data-target-id="'.$field_id.'">'.$attr[ 'value' ].'</pre>
+					  <span class="windowLabel" id="cssLabel">CSS</span>
+					</div>
+				</div>
+				';
+			} else if ( $editor_html ) {
+				$output.='
+				<div class="code-editor-wrapper">
+					<div class="window html">
+					  <pre id="html" data-target-id="'.$field_id.'">'.$attr[ 'value' ].'</pre>
+					  <span class="windowLabel" id="htmlLabel">HTML</span>
+					</div>
+				</div>
+				';
+			} else if ( $editor_js ) {
+				$output.='
+				<div class="code-editor-wrapper">
+					<div class="window js">
+					  <pre id="js" data-target-id="'.$field_id.'">'.$attr[ 'value' ].'</pre>
+					  <span class="windowLabel" id="jsLabel">JS</span>
+					</div>
+				</div>
+				';
+			}
             
             return $output;
         }
