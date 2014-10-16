@@ -790,8 +790,8 @@ pre#html,
 pre#js,
 pre#css {
 	padding: 0px !important;
-	border-color: #0074a2 !important;
-	background-color: #ffc !important;
+	border-left: 0px solid #0074a2 !important;
+	background-color: #E9F2F9 !important;
 	margin: 0px !important;
 }
 

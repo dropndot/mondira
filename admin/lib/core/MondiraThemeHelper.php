@@ -3,10 +3,10 @@
 * 
 * Mondira Theme Helper Class
 * 
-* @since version 1.0
-* @last modified 18 Apr, 2014
-* @author Jewel Ahmed<tojibon@gmail.com>
-* @author url http://www.codeatomic.com 
+* @Since Version: 1.0
+* @Last Modified: 15 Oct, 2014
+* @Author: Jewel Ahmed<tojibon@gmail.com>
+* @Author URL: http://codeatomic.com 
 * 
 */ 
 if( ! defined( 'THEME_SLUG' ) ) { die( 'Sorry to say, you can not access this page on this way!' ); }
@@ -157,6 +157,13 @@ if(!class_exists('MondiraThemeHelper')){
 			}
 
 			
+			if ( $editor_css || $editor_html || $editor_js ) {
+				wp_enqueue_style('mondira-admin-code-editor-cloudEdit');
+				wp_enqueue_script('mondira-admin-code-editor-ace');
+				wp_enqueue_script('mondira-admin-code-editor-ext-emmet');
+				wp_enqueue_script('mondira-admin-code-editor-cloudEdit');
+			}
+			
 			if ( $editor_css ) {
 				$output.='
 				<div class="code-editor-wrapper">
@@ -170,7 +177,7 @@ if(!class_exists('MondiraThemeHelper')){
 				$output.='
 				<div class="code-editor-wrapper">
 					<div class="window html">
-					  <pre id="html" data-target-id="'.$field_id.'">'.$attr[ 'value' ].'</pre>
+					  <pre id="html" data-target-id="'.$field_id.'">'.htmlspecialchars($attr[ 'value' ]).'</pre>
 					  <span class="windowLabel" id="htmlLabel">HTML</span>
 					</div>
 				</div>

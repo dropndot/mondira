@@ -146,11 +146,11 @@ if ( !class_exists( 'MondiraThemeMetabox' ) ) {
         }
         
         function textarea($value=array()) {
-            echo $this->html->formTableTextarea(array('title'=>$value['title'], 'name'=>$value['id'], 'value'=>$value['default'], 'data-fold'=>!empty($value['data-fold'])?$value['data-fold']:'', 'type'=>'textarea', 'id'=>$value['id'], 'class'=>!empty($value['regular-text'])?$value['class']:'regular-text', 'avoid_br'=>!empty($value['avoid_br'])?$value['avoid_br']:'no'), $description = $value['desc']);
+			echo $this->html->formTableTextarea(array('title'=>$value['title'], 'name'=>$value['id'], 'value'=>$value['default'], 'data-fold'=>!empty($value['data-fold'])?$value['data-fold']:'', 'type'=>'textarea', 'id'=>$value['id'], 'class'=>!empty($value['class'])?$value['class']:'regular-text', 'avoid_br'=>!empty($value['avoid_br'])?$value['avoid_br']:'no'), $description = $value['desc']);
         }
         
         function editor($value=array()) {
-            echo $this->html->formTableTextarea(array('title'=>$value['title'], 'name'=>$value['id'], 'value'=>$value['default'], 'data-fold'=>!empty($value['data-fold'])?$value['data-fold']:'', 'type'=>'editor', 'id'=>$value['id'], 'class'=>!empty($value['regular-text'])?$value['class']:'regular-text', 'avoid_br'=>!empty($value['avoid_br'])?$value['avoid_br']:'no'), $description = $value['desc']);
+            echo $this->html->formTableTextarea(array('title'=>$value['title'], 'name'=>$value['id'], 'value'=>$value['default'], 'data-fold'=>!empty($value['data-fold'])?$value['data-fold']:'', 'type'=>'editor', 'id'=>$value['id'], 'class'=>!empty($value['class'])?$value['class']:'regular-text', 'avoid_br'=>!empty($value['avoid_br'])?$value['avoid_br']:'no'), $description = $value['desc']);
         }
         
         function checkbox($value=array()){

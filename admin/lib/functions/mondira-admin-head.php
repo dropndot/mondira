@@ -29,11 +29,9 @@ if (!function_exists('load_mondira_admin_enqueue_script')) {
         wp_enqueue_script('mondira-admin-jquery-magnific-popup-script', FRAMEWORK_ADMIN_JS . '/plugins/magnific-popup.js', array('jquery'), '1.0', true );
         
 		//Code Editor JS
-		wp_enqueue_script('mondira-admin-code-editor-ace', FRAMEWORK_ADMIN_RESOURCES_URI . '/lib/code-editor/js/ace/ace.js', array('jquery'), '1.0', true  );
-		wp_enqueue_script('mondira-admin-code-editor-ext-emmet', FRAMEWORK_ADMIN_RESOURCES_URI . '/lib/code-editor/js/ace/ext-emmet.js', array('jquery'), '1.0', true  );
-		wp_enqueue_script('mondira-admin-code-editor-emmet', FRAMEWORK_ADMIN_RESOURCES_URI . '/lib/code-editor/js/ace/emmet.js', array('jquery'), '1.0', true  );
-		wp_enqueue_script('mondira-admin-code-editor-jquery.ui.position', FRAMEWORK_ADMIN_RESOURCES_URI . '/lib/code-editor/js/jquery.ui.position.min.js', array('jquery'), '1.0', true  );
-		wp_enqueue_script('mondira-admin-code-editor-cloudEdit', FRAMEWORK_ADMIN_RESOURCES_URI . '/lib/code-editor/js/cloudEdit.js', array('jquery'), '1.0', true  );
+		wp_register_script('mondira-admin-code-editor-ace', FRAMEWORK_ADMIN_RESOURCES_URI . '/lib/code-editor/js/ace/ace.js', array('jquery'), '1.0', true  );
+		wp_register_script('mondira-admin-code-editor-ext-emmet', FRAMEWORK_ADMIN_RESOURCES_URI . '/lib/code-editor/js/ace/ext-emmet.js', array('jquery'), '1.0', true  );
+		wp_register_script('mondira-admin-code-editor-cloudEdit', FRAMEWORK_ADMIN_RESOURCES_URI . '/lib/code-editor/js/cloudEdit.js', array('jquery'), '1.0', true  );
 		
 		wp_enqueue_script('mondira-admin-script', FRAMEWORK_ADMIN_JS . '/mondira-admin.js', array('jquery'), '1.0', true );
         wp_enqueue_script('mondira-custom-admin-js', get_template_directory_uri() . '/resources/js/custom-admin.js', array('jquery'), '1.2', true );
@@ -68,7 +66,7 @@ if (!function_exists('load_admin_enqueue_style')) {
 		wp_enqueue_style('mondira-admin-magnific-popup-style', FRAMEWORK_ADMIN_CSS . '/magnific-popup.css' );
 		
 		//Code Editor CSS
-		wp_enqueue_style('mondira-admin-code-editor-cloudEdit', FRAMEWORK_ADMIN_RESOURCES_URI . '/lib/code-editor/css/cloudEdit.css' );
+		wp_register_style('mondira-admin-code-editor-cloudEdit', FRAMEWORK_ADMIN_RESOURCES_URI . '/lib/code-editor/css/cloudEdit.css' );
 		
 		wp_enqueue_style('mondira-theme-admin-style', FRAMEWORK_ADMIN_CSS . '/style.css');        
     }
