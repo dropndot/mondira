@@ -356,6 +356,8 @@ jQuery(document).ready( function($) {
 	    }, 0 );   
 	} ); 
 	
+	
+	
 	/*
 	---------------------------------------------------------------------------------------
 		Generating Shortcode for WP Editor
@@ -462,6 +464,139 @@ jQuery(document).ready( function($) {
 		$('.shortcode-options').hide();
 		$('#options-'+$(this).val()).show();
     });
+	
+	/*
+	---------------------------------------------------------------------------------------
+		WP Editor dependency for shortcode generator
+	---------------------------------------------------------------------------------------
+	*/
+	var $shortcode = $dependency_element = $dependency_is_empty = $dependency_not_empty = $dependency_values = '';
+	var $ = jQuery;
+	$('.atomic-shortcode-option').each(function(){
+		$shortcode = $(this).data('shortcode');
+		$dependency_element = $(this).data('dependency_element');
+		$dependency_is_empty = $(this).data('dependency_is_empty');
+		$dependency_not_empty = $(this).data('dependency_not_empty');
+		$dependency_values = $(this).data('dependency_values');
+		if ( typeof $shortcode == 'undefined' || $shortcode == '' || typeof $dependency_element == 'undefined' || $dependency_element == '' ) {
+			
+		} else if (  $dependency_element != '' ) {
+			var $delement = $(this);//Depencency Element
+			$( '#options-' + $shortcode ).find( '.atomic-shortcode-option select' ).each(function(){
+				var $ashortcode = $shortcode;
+				var $adependency_element = $dependency_element;
+				var $adependency_is_empty = $dependency_is_empty;
+				var $adependency_not_empty = $dependency_not_empty;
+				var $adependency_values = $dependency_values;
+				var $adelement = $delement;
+				
+				var $attrname = $(this).data('attrname');
+				
+				if ( $attrname == $adependency_element ) {
+					$(this).change(function(){
+						var $aadelement = $adelement;
+						var $initial_val = $(this).val();
+						$aadelement.hide();
+						if ( $initial_val == '' && $adependency_is_empty ) {
+							$aadelement.show();
+						} else if ( $initial_val != '' && $adependency_not_empty ) {
+							$aadelement.show();
+						} else if ( $initial_val == '' && $adependency_not_empty ) {
+							$aadelement.hide();
+						} else if ( $initial_val == $adependency_values ) {
+							$aadelement.show();
+						} else {
+							var $dvalues = $adependency_values.split('|');
+							$.each($dvalues, function( key, value ) {
+								if ( $initial_val == value ) {
+									$aadelement.show();
+								}
+							});
+						}
+					});
+				}
+			});
+			
+			$( '#options-' + $shortcode ).find( '.atomic-shortcode-option textarea, .atomic-shortcode-option input:text' ).each(function(){
+				var $ashortcode = $shortcode;
+				var $adependency_element = $dependency_element;
+				var $adependency_is_empty = $dependency_is_empty;
+				var $adependency_not_empty = $dependency_not_empty;
+				var $adependency_values = $dependency_values;
+				var $adelement = $delement;
+				
+				var $attrname = $(this).data('attrname');
+				
+				if ( $attrname == $adependency_element ) {
+					$(this).blur(function(){
+						var $aadelement = $adelement;
+						var $initial_val = $(this).val();
+						$aadelement.hide();
+						if ( $initial_val == '' && $adependency_is_empty ) {
+							$aadelement.show();
+						} else if ( $initial_val != '' && $adependency_not_empty ) {
+							$aadelement.show();
+						} else if ( $initial_val == '' && $adependency_not_empty ) {
+							$aadelement.hide();
+						} else if ( $initial_val == $adependency_values ) {
+							$aadelement.show();
+						} else {
+							var $dvalues = $adependency_values.split('|');
+							$.each($dvalues, function( key, value ) {
+								if ( $initial_val == value ) {
+									$aadelement.show();
+								}
+							});
+						}
+					});
+				}
+			});
+			
+			$( '#options-' + $shortcode ).find( '.atomic-shortcode-option input:checkbox' ).each(function(){
+				var $ashortcode = $shortcode;
+				var $adependency_element = $dependency_element;
+				var $adependency_is_empty = $dependency_is_empty;
+				var $adependency_not_empty = $dependency_not_empty;
+				var $adependency_values = $dependency_values;
+				var $adelement = $delement;
+				
+				var $attrname = $(this).data('attrname');
+				
+				if ( $attrname == $adependency_element ) {
+					$(this).click(function() {
+						$delement.hide();
+						if (!$(this).is(':checked')) {
+							if ( $adependency_is_empty ) {
+								$delement.show();
+							} else if ( $adependency_not_empty ) {
+								$delement.hide();
+							}
+						} else {
+							if ( $adependency_not_empty ) {
+								$delement.show();
+							} else if ( $adependency_is_empty ) {
+								$delement.hide();
+							}
+						}
+					});
+					
+					if (!$(this).is(':checked')) {
+						if ( $adependency_is_empty ) {
+							$delement.show();
+						} else if ( $adependency_not_empty ) {
+							$delement.hide();
+						}
+					} else {
+						if ( $adependency_not_empty ) {
+							$delement.show();
+						} else if ( $adependency_is_empty ) {
+							$delement.hide();
+						}
+					}
+				}
+			});
+		}
+	});
 });
 
 /*

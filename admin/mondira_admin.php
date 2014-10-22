@@ -82,7 +82,7 @@ if(!class_exists('Mondira_admin')){
             } 
         
             //updating the options list
-            if(!empty($options_public)){
+            if( !empty( $options_public ) && isset( $options_public['title'] ) && !empty( $options_public['title'] ) && !empty( $options_public['docs'] ) && is_array( $options_public['docs'] ) ){
                 $options['title']=$options_public['title'];
                 foreach($options_public['docs'] as $key=>$value){
                      $options['docs'][]=$value;

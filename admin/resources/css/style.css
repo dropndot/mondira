@@ -768,6 +768,10 @@ body .button.mondira-shortcode-generator:hover {
 	z-index: 999999 !important;
 }
 
+body .media-modal {
+	z-index: 9999999 !important;
+}
+
 .mfp-close-btn-in .mfp-close {
 	color: #fff !important;
 	right: 20px !important;
@@ -802,4 +806,10 @@ pre#css {
 	overflow: hidden;
 	padding: 0px;
 	margin: 0px;
+}
+
+.atomic-shortcode-option {
+	display: block;
+	overflow: hidden;
+	margin-bottom: 10px;
 }

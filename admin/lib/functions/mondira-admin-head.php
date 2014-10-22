@@ -27,6 +27,7 @@ if (!function_exists('load_mondira_admin_enqueue_script')) {
         wp_enqueue_script('mondira-admin-jquery-rangeinput-script', FRAMEWORK_ADMIN_JS . '/plugins/jquery.rangeinput.js', array('jquery'), '1.0', true );
         wp_enqueue_script('mondira-admin-jquery-chosen-script', FRAMEWORK_ADMIN_JS . '/plugins/chosen/chosen.jquery.min.js', array('jquery'), '1.0', true );
         wp_enqueue_script('mondira-admin-jquery-magnific-popup-script', FRAMEWORK_ADMIN_JS . '/plugins/magnific-popup.js', array('jquery'), '1.0', true );
+        wp_enqueue_script('mondira-admin-jquery.data.css', FRAMEWORK_ADMIN_JS . '/jquery.data.css.js', array('jquery'), '1.0', true );
         
 		//Code Editor JS
 		wp_register_script('mondira-admin-code-editor-ace', FRAMEWORK_ADMIN_RESOURCES_URI . '/lib/code-editor/js/ace/ace.js', array('jquery'), '1.0', true  );
