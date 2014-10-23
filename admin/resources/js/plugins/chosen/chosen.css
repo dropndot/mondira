@@ -196,7 +196,7 @@
   cursor: pointer;
   display: list-item;
   list-style-type: none;
-  padding: 5px 10px;
+  padding: 0px 10px;
   line-height: 25px;
   margin: 0px;
 }

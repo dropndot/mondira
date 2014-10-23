@@ -739,6 +739,20 @@ div[data-type="radios"] .content, div[data-type="checkbox"] .content {
 	height: 93px !important;
 }
 
+.container-checkbox {
+	line-height: 22px;
+}
+
+#mondira-shortcode-generator  .container-checkbox input[type="checkbox"] {
+	margin-bottom: 0px;
+}
+
+.container-checkbox  .checkbox-label{
+	line-height: 22px;
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
 .button.mondira-shortcode-generator, .ui-buttonset .ui-state-active {
 	background-color: #1990DC !important;
     background-image: none!important;
@@ -808,7 +822,7 @@ pre#css {
 	margin: 0px;
 }
 
-.atomic-shortcode-option {
+.mondira-shortcode-option {
 	display: block;
 	overflow: hidden;
 	margin-bottom: 10px;
