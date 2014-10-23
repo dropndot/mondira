@@ -100,7 +100,7 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 			switch( $attr_option['type'] ) {
 				case 'radio':
 					$shortcode_field_html .= '
-					<div class="atomic-shortcode-option" id="atomic-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
+					<div class="mondira-shortcode-option" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
 						<div class="label"><strong>'.$label.': </strong></div><div class="content">';
 						foreach( $attr_option['opt'] as $val => $title ){
 							(isset($attr_option['def']) && !empty($attr_option['def'])) ? $def = $attr_option['def'] : $def = '';
@@ -114,19 +114,42 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 					
 				case 'checkbox':
 					$shortcode_field_html .= '
-					<div class="atomic-shortcode-option" id="atomic-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
+					<div class="mondira-shortcode-option" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
 						<div class="label"><label for="' . $name . '"><strong>' . $label . ': </strong></label></div>    
-						<div class="content container-checkbox">' . $suffix . '<input type="checkbox" data-attrname="'.$name.'" class="' . $name . '" id="' . $name . '" />' . $postfix . ' ' . $desc. '</div>
+						<div class="content container-checkbox">' . $suffix; 
+
+						if( !empty( $attr_option['value'] ) ) {
+							$checkbox_value = $attr_option['value'];
+						} else if( !empty( $attr_option['values'] ) ) {
+							$checkbox_value = $attr_option['values'];
+						}
+						
+						if( !empty( $checkbox_value ) && !is_array( $checkbox_value ) ) {
+							$shortcode_field_html .= '<input type="checkbox" data-attrname="'.$name.'" value="'.$checkbox_value.'" class="skip-it input-checkbox-to-text ' . $name . '" id="' . $name . '" />';
+						} else if( !empty( $checkbox_value ) && is_array( $checkbox_value ) ) {
+							foreach( $checkbox_value as $k => $v ) {
+								$shortcode_field_html .= '<input type="checkbox" data-attrname="'.$name.'" value="'.$k.'" class="skip-it input-checkbox-to-text ' . $name . '" id="' . $name . '" /><span class="checkbox-label">' . $v . '</span>';
+							}
+						}
+						$shortcode_field_html .='<input data-display="none" class="attr '.$class.'" type="text" data-attrname="'.$name.'" value="" id="checkbox-val-' . $name . '" />';
+						
+						$shortcode_field_html .=  $postfix . ' ' . $desc. '</div>
 					</div>';
 					break;	
 				
 				case 'select':
 				case 'dropdown': //Adding support for Visual Composer default attributes
 					$shortcode_field_html .= '
-					<div class="atomic-shortcode-option" id="atomic-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
+					<div class="mondira-shortcode-option" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
 						<div class="label"><label for="'.$name.'"><strong>'.$label.': </strong></label></div>
 						<div class="content container-select">' . $suffix . '<select data-attrname="'.$name.'" id="'.$name.'">';
-						$values = $attr_option['values'];
+						if ( !empty( $attr_option['values'] ) ) {
+							$values = $attr_option['values'];
+						} else if ( !empty( $attr_option['value'] ) ) {
+							$values = $attr_option['value'];
+						} else {
+							$values = array();
+						}
 						foreach( $values as $key=>$value ){
 							$shortcode_field_html .= '<option value="'.$key.'">'.$value.'</option>';
 						}
@@ -136,7 +159,7 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 				
 				case 'multi-select':
 					$shortcode_field_html .= '
-					<div class="atomic-shortcode-option" id="atomic-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
+					<div class="mondira-shortcode-option" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
 						<div class="label"><label for="'.$name.'"><strong>'.$label.': </strong></label></div>
 						<div class="content container-multi-select">' . $suffix . '<select data-attrname="'.$name.'" multiple="multiple" id="'.$name.'">';
 						$values = $attr_option['values'];
@@ -149,7 +172,7 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 					
 				case 'textarea':
 					$shortcode_field_html .= '
-					<div class="atomic-shortcode-option" id="atomic-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
+					<div class="mondira-shortcode-option" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
 						<div class="label"><label for="shortcode-option-'.$name.'"><strong>'.$label.': </strong></label></div>
 						<div class="content container-textarea">' . $suffix . '<textarea data-attrname="'.$name.'"></textarea> ' . $postfix . ' '  . $desc . '</div>
 					</div>';
@@ -158,15 +181,15 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 				case 'color':
 				case 'colorpicker': //Adding support for Visual Composer default attributes
 					$shortcode_field_html .= '
-					<div class="atomic-shortcode-option" id="atomic-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
+					<div class="mondira-shortcode-option" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
 						<div class="label"><label for="shortcode-option-'.$name.'"><strong>'.$label.': </strong></label></div>
-						<div class="content container-color">' . $suffix . '<input class="attr '.$class.'" type="text" data-attrname="'.$name.'" value="" />' . $postfix . ' '  . $desc . '</div>
+						<div class="content container-color">' . $suffix . '<input class="attr wp-color-picker '.$class.'" type="text" data-attrname="'.$name.'" value="" />' . $postfix . ' '  . $desc . '</div>
 					</div>';
 					break;
 				
 				case 'number':
 					$shortcode_field_html .= '
-					<div class="atomic-shortcode-option" id="atomic-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
+					<div class="mondira-shortcode-option" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
 						<div class="label"><label for="shortcode-option-'.$name.'"><strong>'.$label.': </strong></label></div>
 						<div class="content container-number">' . $suffix . '<input class="attr '.$class.'" type="number" data-attrname="'.$name.'" value="'.$value.'" />' . $postfix . ' ' . $desc . '</div>
 					</div>';
@@ -174,7 +197,7 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 				
 				case 'attach_image':
 					$shortcode_field_html .= '
-					<div class="atomic-shortcode-option" id="atomic-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
+					<div class="mondira-shortcode-option" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
 					<div class="label"><label for="shortcode-option-'.$name.'"><strong>'.$label.': </strong></label></div>
 						<div class="content container-image">' . $suffix . '<input class="attr '.$class.'" type="text" id="'.$name.'" data-attrname="'.$name.'" value="'.$value.'" />' . $postfix;
 					$shortcode_field_html .= $desc;
@@ -191,7 +214,7 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 				
 				case 'attach_file':
 					$shortcode_field_html .= '
-					<div class="atomic-shortcode-option" id="atomic-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
+					<div class="mondira-shortcode-option" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
 					<div class="label"><label for="shortcode-option-'.$name.'"><strong>'.$label.': </strong></label></div>
 						<div class="content container-image">' . $suffix . '<input class="attr '.$class.'" type="text" id="'.$name.'" data-attrname="'.$name.'" value="'.$value.'" />' . $postfix;
 					$shortcode_field_html .= $desc;
@@ -208,7 +231,7 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 				case 'textfield': //Adding support for Visual Composer default attributes
 				default:
 					$shortcode_field_html .= '
-					<div class="atomic-shortcode-option" id="atomic-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
+					<div class="mondira-shortcode-option" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
 						<div class="label"><label for="shortcode-option-'.$name.'"><strong>'.$label.': </strong></label></div>
 						<div class="content container-text">' . $suffix . '<input class="attr '.$class.'" type="text" data-attrname="'.$name.'" value="" />' . $postfix . ' '  . $desc . '</div>
 					</div>';

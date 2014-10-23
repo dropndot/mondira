@@ -378,7 +378,7 @@ jQuery(document).ready( function($) {
 				if ( $(this).hasClass('skip-it') ) {
 				
 				} else {
-					code += ' ' + $(this).attr('class')+'="true"';	
+					code += ' ' + $(this).data('attrname') + '="' + $(this).val() + '"';	
 				}
 			 }			 
 		});
@@ -467,12 +467,33 @@ jQuery(document).ready( function($) {
 	
 	/*
 	---------------------------------------------------------------------------------------
+		Adding value on text field on checkbox click event
+	---------------------------------------------------------------------------------------
+	*/
+    $('.input-checkbox-to-text').click(function() {
+		var option_name = $(this).data('attrname');
+		var parent = $(this).parents('.mondira-shortcode-option');
+		var parent_id = '#'+parent.attr('id');
+		var inner_checkboxes = $(parent_id).find('.input-checkbox-to-text');
+		var checkboxs_values = [];
+		inner_checkboxes.each(function(){
+			if (!$(this).is(':checked')) {
+				
+			} else {
+				checkboxs_values.push($(this).val());
+			}
+		});
+		$('#checkbox-val-' + option_name).val(checkboxs_values.join());
+    });
+	
+	/*
+	---------------------------------------------------------------------------------------
 		WP Editor dependency for shortcode generator
 	---------------------------------------------------------------------------------------
 	*/
 	var $shortcode = $dependency_element = $dependency_is_empty = $dependency_not_empty = $dependency_values = '';
 	var $ = jQuery;
-	$('.atomic-shortcode-option').each(function(){
+	$('.mondira-shortcode-option').each(function(){
 		$shortcode = $(this).data('shortcode');
 		$dependency_element = $(this).data('dependency_element');
 		$dependency_is_empty = $(this).data('dependency_is_empty');
@@ -482,7 +503,7 @@ jQuery(document).ready( function($) {
 			
 		} else if (  $dependency_element != '' ) {
 			var $delement = $(this);//Depencency Element
-			$( '#options-' + $shortcode ).find( '.atomic-shortcode-option select' ).each(function(){
+			$( '#options-' + $shortcode ).find( '.mondira-shortcode-option select' ).each(function(){
 				var $ashortcode = $shortcode;
 				var $adependency_element = $dependency_element;
 				var $adependency_is_empty = $dependency_is_empty;
@@ -517,7 +538,7 @@ jQuery(document).ready( function($) {
 				}
 			});
 			
-			$( '#options-' + $shortcode ).find( '.atomic-shortcode-option textarea, .atomic-shortcode-option input:text' ).each(function(){
+			$( '#options-' + $shortcode ).find( '.mondira-shortcode-option textarea, .mondira-shortcode-option input:text' ).each(function(){
 				var $ashortcode = $shortcode;
 				var $adependency_element = $dependency_element;
 				var $adependency_is_empty = $dependency_is_empty;
@@ -552,7 +573,7 @@ jQuery(document).ready( function($) {
 				}
 			});
 			
-			$( '#options-' + $shortcode ).find( '.atomic-shortcode-option input:checkbox' ).each(function(){
+			$( '#options-' + $shortcode ).find( '.mondira-shortcode-option input:checkbox' ).each(function(){
 				var $ashortcode = $shortcode;
 				var $adependency_element = $dependency_element;
 				var $adependency_is_empty = $dependency_is_empty;
