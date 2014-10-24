@@ -171,10 +171,18 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 					break;
 					
 				case 'textarea':
+					if( !empty( $attr_option['value'] ) ) {
+						$textarea_value = $attr_option['value'];
+					} else if( !empty( $attr_option['values'] ) ) {
+						$textarea_value = $attr_option['values'];
+					} else {
+						$textarea_value = '';
+					}
+				
 					$shortcode_field_html .= '
 					<div class="mondira-shortcode-option" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
 						<div class="label"><label for="shortcode-option-'.$name.'"><strong>'.$label.': </strong></label></div>
-						<div class="content container-textarea">' . $suffix . '<textarea data-attrname="'.$name.'"></textarea> ' . $postfix . ' '  . $desc . '</div>
+						<div class="content container-textarea">' . $suffix . '<textarea data-attrname="'.$name.'">'.$textarea_value.'</textarea> ' . $postfix . ' '  . $desc . '</div>
 					</div>';
 					break;
 						
@@ -230,10 +238,17 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 				case 'text':
 				case 'textfield': //Adding support for Visual Composer default attributes
 				default:
+					if( !empty( $attr_option['value'] ) ) {
+						$text_value = $attr_option['value'];
+					} else if( !empty( $attr_option['values'] ) ) {
+						$text_value = $attr_option['values'];
+					} else {
+						$text_value = '';
+					}
 					$shortcode_field_html .= '
 					<div class="mondira-shortcode-option" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
 						<div class="label"><label for="shortcode-option-'.$name.'"><strong>'.$label.': </strong></label></div>
-						<div class="content container-text">' . $suffix . '<input class="attr '.$class.'" type="text" data-attrname="'.$name.'" value="" />' . $postfix . ' '  . $desc . '</div>
+						<div class="content container-text">' . $suffix . '<input class="attr '.$class.'" type="text" data-attrname="'.$name.'" value="'.$text_value.'" />' . $postfix . ' '  . $desc . '</div>
 					</div>';
 					break;
 			}
