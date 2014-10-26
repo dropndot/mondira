@@ -387,8 +387,6 @@ input.regular-text.range{
 }
 
 #mondira-options-tabs .regular-text {
-	height: 33px !important;
-	line-height: 33px !important;
 	padding: 4px 4px 6px 8px !important;
 	
 	-webkit-box-shadow: none !important;
