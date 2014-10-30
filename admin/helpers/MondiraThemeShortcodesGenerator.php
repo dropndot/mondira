@@ -101,7 +101,7 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 				case 'radio':
 					$shortcode_field_html .= '
 					<div class="mondira-shortcode-option" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
-						<div class="label"><strong>'.$label.': </strong></div><div class="content">';
+						<div class="label"><strong>'.$label.' </strong></div><div class="content">';
 						foreach( $attr_option['opt'] as $val => $title ){
 							(isset($attr_option['def']) && !empty($attr_option['def'])) ? $def = $attr_option['def'] : $def = '';
 							 $shortcode_field_html .= '
@@ -115,7 +115,7 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 				case 'checkbox':
 					$shortcode_field_html .= '
 					<div class="mondira-shortcode-option" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
-						<div class="label"><label for="' . $name . '"><strong>' . $label . ': </strong></label></div>    
+						<div class="label"><label for="' . $name . '"><strong>' . $label . ' </strong></label></div>    
 						<div class="content container-checkbox">' . $suffix; 
 
 						if( !empty( $attr_option['value'] ) ) {
@@ -141,7 +141,7 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 				case 'dropdown': //Adding support for Visual Composer default attributes
 					$shortcode_field_html .= '
 					<div class="mondira-shortcode-option" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
-						<div class="label"><label for="'.$name.'"><strong>'.$label.': </strong></label></div>
+						<div class="label"><label for="'.$name.'"><strong>'.$label.' </strong></label></div>
 						<div class="content container-select">' . $suffix . '<select data-attrname="'.$name.'" id="'.$name.'">';
 						if ( !empty( $attr_option['values'] ) ) {
 							$values = $attr_option['values'];
@@ -160,7 +160,7 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 				case 'multi-select':
 					$shortcode_field_html .= '
 					<div class="mondira-shortcode-option" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
-						<div class="label"><label for="'.$name.'"><strong>'.$label.': </strong></label></div>
+						<div class="label"><label for="'.$name.'"><strong>'.$label.' </strong></label></div>
 						<div class="content container-multi-select">' . $suffix . '<select data-attrname="'.$name.'" multiple="multiple" id="'.$name.'">';
 						$values = $attr_option['values'];
 						foreach( $values as $k => $v ){
@@ -181,7 +181,7 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 				
 					$shortcode_field_html .= '
 					<div class="mondira-shortcode-option" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
-						<div class="label"><label for="shortcode-option-'.$name.'"><strong>'.$label.': </strong></label></div>
+						<div class="label"><label for="shortcode-option-'.$name.'"><strong>'.$label.' </strong></label></div>
 						<div class="content container-textarea">' . $suffix . '<textarea data-attrname="'.$name.'">'.$textarea_value.'</textarea> ' . $postfix . ' '  . $desc . '</div>
 					</div>';
 					break;
@@ -190,7 +190,7 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 				case 'colorpicker': //Adding support for Visual Composer default attributes
 					$shortcode_field_html .= '
 					<div class="mondira-shortcode-option" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
-						<div class="label"><label for="shortcode-option-'.$name.'"><strong>'.$label.': </strong></label></div>
+						<div class="label"><label for="shortcode-option-'.$name.'"><strong>'.$label.' </strong></label></div>
 						<div class="content container-color">' . $suffix . '<input class="attr wp-color-picker '.$class.'" type="text" data-attrname="'.$name.'" value="" />' . $postfix . ' '  . $desc . '</div>
 					</div>';
 					break;
@@ -198,7 +198,7 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 				case 'number':
 					$shortcode_field_html .= '
 					<div class="mondira-shortcode-option" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
-						<div class="label"><label for="shortcode-option-'.$name.'"><strong>'.$label.': </strong></label></div>
+						<div class="label"><label for="shortcode-option-'.$name.'"><strong>'.$label.' </strong></label></div>
 						<div class="content container-number">' . $suffix . '<input class="attr '.$class.'" type="number" data-attrname="'.$name.'" value="'.$value.'" />' . $postfix . ' ' . $desc . '</div>
 					</div>';
 					break;
@@ -206,7 +206,7 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 				case 'attach_image':
 					$shortcode_field_html .= '
 					<div class="mondira-shortcode-option" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
-					<div class="label"><label for="shortcode-option-'.$name.'"><strong>'.$label.': </strong></label></div>
+					<div class="label"><label for="shortcode-option-'.$name.'"><strong>'.$label.' </strong></label></div>
 						<div class="content container-image">' . $suffix . '<input class="attr '.$class.'" type="text" id="'.$name.'" data-attrname="'.$name.'" value="'.$value.'" />' . $postfix;
 					$shortcode_field_html .= $desc;
 					$shortcode_field_html.= '
@@ -223,7 +223,7 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 				case 'attach_file':
 					$shortcode_field_html .= '
 					<div class="mondira-shortcode-option" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
-					<div class="label"><label for="shortcode-option-'.$name.'"><strong>'.$label.': </strong></label></div>
+					<div class="label"><label for="shortcode-option-'.$name.'"><strong>'.$label.' </strong></label></div>
 						<div class="content container-image">' . $suffix . '<input class="attr '.$class.'" type="text" id="'.$name.'" data-attrname="'.$name.'" value="'.$value.'" />' . $postfix;
 					$shortcode_field_html .= $desc;
 					$shortcode_field_html.= '
@@ -247,7 +247,7 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 					}
 					$shortcode_field_html .= '
 					<div class="mondira-shortcode-option" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
-						<div class="label"><label for="shortcode-option-'.$name.'"><strong>'.$label.': </strong></label></div>
+						<div class="label"><label for="shortcode-option-'.$name.'"><strong>'.$label.' </strong></label></div>
 						<div class="content container-text">' . $suffix . '<input class="attr '.$class.'" type="text" data-attrname="'.$name.'" value="'.$text_value.'" />' . $postfix . ' '  . $desc . '</div>
 					</div>';
 					break;
