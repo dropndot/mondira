@@ -375,6 +375,10 @@ input.regular-text.range{
 	transition: 0.1s linear all;
 }
 
+#mondira-options-tabs .multiple {
+	overflow: scroll;
+	height: 200px;
+}
 
 #mondira-options-tabs .chosen-container {
 	max-width: 300px !important;
