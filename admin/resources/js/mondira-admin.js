@@ -126,21 +126,21 @@ jQuery(document).ready( function($) {
 		@Since Version 1.0
 	---------------------------------------------------------------------------------------
 	*/    
-    var wpColorOptions = {
-		// you can declare a default color here,
-		// or in the data-default-color attribute on the input
-		defaultColor: false,
-		// a callback to fire whenever the color changes to a valid color
-		change: function(event, ui){},
-		// a callback to fire when the input is emptied or an invalid color
-		clear: function() {},
-		// hide the color picker controls on load
-		hide: true,
-		// show a group of common colors beneath the square
-		// or, supply an array of colors to customize further
-		palettes: ['#000000', '#030a0e', '#ffffff', '#f82d1e', '#dd9933', '#5d8b6e', '#354650', '#1e73be']
-	};
-    $('.wp-color-picker').wpColorPicker(wpColorOptions);
+    // var wpColorOptions = {
+		// // you can declare a default color here,
+		// // or in the data-default-color attribute on the input
+		// defaultColor: false,
+		// // a callback to fire whenever the color changes to a valid color
+		// change: function(event, ui){},
+		// // a callback to fire when the input is emptied or an invalid color
+		// clear: function() {},
+		// // hide the color picker controls on load
+		// hide: true,
+		// // show a group of common colors beneath the square
+		// // or, supply an array of colors to customize further
+		// palettes: ['#000000', '#030a0e', '#ffffff', '#f82d1e', '#dd9933', '#5d8b6e', '#354650', '#1e73be']
+	// }
+    $('.wp-color-picker').wpColorPicker();
 	
 	/*
 	---------------------------------------------------------------------------------------
@@ -402,6 +402,9 @@ jQuery(document).ready( function($) {
 			Textarea field attr processing
 		---------------------------------------------------------------------------------------
 		*/
+		// $('#options-'+shortcode_name+' textarea:not(".skip-it")').each(function(){
+			 // code += ' ' + $(this).attr('data-attrname')+'="'+ $(this).val() +'"';	
+		// });
 		$('#options-'+shortcode_name+' textarea:not(".skip-it")').each(function(){
 			if ( 'content' == $(this).attr('data-attrname') ) {
 				$( '#shortcode-inner-content' ).html( $(this).val() );
@@ -442,7 +445,7 @@ jQuery(document).ready( function($) {
 			if ( $(this).hasClass('skip-it') ) {
 				
 			} else {
-				if( $(this).attr('type') == 'text' || $(this).attr('type') == 'number' ){ code += ' '+ $(this).attr('data-attrname')+'="'+ $(this).val()+'"'; }
+				if( $(this).attr('type') == 'text' ){ code += ' '+ $(this).attr('data-attrname')+'="'+ $(this).val()+'"'; }
 				else { if($(this).attr('checked') == 'checked') code += ' '+ $(this).attr('data-attrname')+'="'+ $(this).val()+'"'; }
 			}
 		});
@@ -556,7 +559,7 @@ jQuery(document).ready( function($) {
 				}
 			});
 			
-			$( '#options-' + $shortcode ).find( '.mondira-shortcode-option textarea, .mondira-shortcode-option input:number, .mondira-shortcode-option input:text' ).each(function(){
+			$( '#options-' + $shortcode ).find( '.mondira-shortcode-option textarea, .mondira-shortcode-option input:text' ).each(function(){
 				var $ashortcode = $shortcode;
 				var $adependency_element = $dependency_element;
 				var $adependency_is_empty = $dependency_is_empty;
