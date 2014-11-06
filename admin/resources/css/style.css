@@ -829,3 +829,25 @@ pre#css {
 	overflow: hidden;
 	margin-bottom: 10px;
 }
+
+.inner_shortcode_buttons {
+	display: block;
+	overflow: hidden;
+	margin-top: 10px;
+}
+
+
+.set-of-nested-shortcode-options {
+	display: block;
+	overflow: hidden;
+	padding: 10px !important;
+	margin-top: 20px;
+	background: #f4f4f4;
+}
+
+.inner_shortcode_buttons a.btn {
+	display: inline-block;
+	float: right;
+	padding: 5px 20px;
+	margin: 0px 5px !important;
+}
