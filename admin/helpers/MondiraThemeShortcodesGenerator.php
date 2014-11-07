@@ -29,12 +29,18 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 			$this->shortcodes[$key]=$attr;
 		}
 		
-		public function mondira_shortcode_fields( $name, $attr_option, $shortcode, $unique_option_id = '' ) {
+		public function mondira_shortcode_fields( $name = '', $attr_option = array(), $shortcode = '', $unique_option_id = '' ) {
 			$shortcode_field_html = $desc = $class = $postfix = $suffix = $value = '';
 			
 			if ( empty( $unique_option_id ) ) {
 				$unique_option_id = time();
 			}
+			
+			if( !empty( $attr_option['html'] ) ) {
+				$shortcode_field_html = $attr_option['html'];
+				return $shortcode_field_html;
+			}
+			
 			
 			if( !empty( $attr_option['desc'] ) ) {
 				$desc = '<p class="description">'.$attr_option['desc'].'</p>';
@@ -207,12 +213,12 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 					$shortcode_field_html .= '
 					<div class="mondira-shortcode-option" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
 					<div class="label"><label for="shortcode-option-'.$name.'"><strong>'.$label.' </strong></label></div>
-						<div class="content container-image">' . $suffix . '<input class="attr '.$class.'" type="text" id="'.$name.'" data-attrname="'.$name.'" value="'.$value.'" />' . $postfix;
+						<div class="content container-image">' . $suffix . '<input class="attr mondira-upload-input '.$class.'" type="text" id="'.$name.'" data-attrname="'.$name.'" value="'.$value.'" />' . $postfix;
 					$shortcode_field_html .= $desc;
 					$shortcode_field_html.= '
 						<br class="clearfix" />
 						<div class="mondira-media-upload-button">
-							<a class="upload_image_button_latest button theme-upload-button" data-target="'.$name.'" id="'.$name.'_thickbox" href="media-upload.php?post_id=0&target='.$name.'&mondira_image_upload=1&type=image&TB_iframe=1&width=640&height=644">Upload/Choose One</a><br />';
+							<a class="upload_image_button_latest button theme-upload-button" data-target="'.$name.'" id="'.$name.'_thickbox" href="media-upload.php?post_id=0&target='.$name.'&mondira_image_upload=1&type=image&TB_iframe=1&width=640&height=644">Upload</a><br />';
 					
 					$shortcode_field_html.= '<div id="'.$name.'_preview" class="mondira-media-preview"></div>';
 					$shortcode_field_html.= '</div>';
@@ -224,7 +230,7 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 					$shortcode_field_html .= '
 					<div class="mondira-shortcode-option" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
 					<div class="label"><label for="shortcode-option-'.$name.'"><strong>'.$label.' </strong></label></div>
-						<div class="content container-image">' . $suffix . '<input class="attr '.$class.'" type="text" id="'.$name.'" data-attrname="'.$name.'" value="'.$value.'" />' . $postfix;
+						<div class="content container-image">' . $suffix . '<input class="attr mondira-upload-input '.$class.'" type="text" id="'.$name.'" data-attrname="'.$name.'" value="'.$value.'" />' . $postfix;
 					$shortcode_field_html .= $desc;
 					$shortcode_field_html.= '
 						<br class="clearfix" />
@@ -283,7 +289,54 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 						$content_html .= '<div class="shortcode-options" id="options-'.$shortcode.'" data-name="'.$shortcode.'" data-type="'.$options['type'].'">';
 						if( !empty($options['attr']) ) {
 							foreach( $options['attr'] as $name => $attr_option ) {
-								$content_html .= $this->mondira_shortcode_fields( $name, $attr_option, $shortcode, $i );
+								if ( $name == 'nested_shortcode' ) {
+									$nested_shortcode = $attr_option;
+									
+									if( !empty( $nested_shortcode['shortcode']) ) {
+										$nshortcode = $nested_shortcode['shortcode'];
+									} else {
+										$nshortcode = 'nested';
+									}
+									
+									
+									if ( !empty( $nested_shortcode['title'] ) ) {
+										$nshortcode_title = $nested_shortcode['title'];
+									} else {
+										$nshortcode_title = 'Nested Shortcode';
+									}
+									
+									if ( !empty( $nested_shortcode['attr'] ) ) {
+										//Nested inner options index
+										$j = 0;
+									
+										//Nested shortcode container started
+										$nattr_option = array( 'html' => '<div class="nested_shortcode" data-nested-shortcode="'.$nshortcode.'"><div class="set-of-nested-shortcode-options">' );	
+										$content_html .= $this->mondira_shortcode_fields( '', $nattr_option, $shortcode, $i . $j );
+										$j++;
+										
+										//Nested shortcode content
+										foreach( $nested_shortcode['attr'] as $nname => $nattr_option ) {
+											$content_html .= $this->mondira_shortcode_fields( $nname, $nattr_option, $nshortcode, $i . $j );
+											$j++;
+										}
+										
+										//Nested shortcode container ended
+										$nattr_option = array( 'html' => '</div>' );	
+										$content_html .= $this->mondira_shortcode_fields( '', $nattr_option, $shortcode, $i . $j );
+										$j++;
+										
+										$nattr_option = array( 'html' => '<div class="inner_shortcode_buttons"><a href="#" class="inner_shortcode_addnew btn">Add New</a><a href="#" class="inner_shortcode_remove btn">Remove</a></div>' );	
+										$content_html .= $this->mondira_shortcode_fields( '', $nattr_option, $shortcode, $i . $j );
+										$j++;
+
+										$nattr_option = array( 'html' => '</div>' );	
+										$content_html .= $this->mondira_shortcode_fields( '', $nattr_option, $shortcode, $i . $j );
+										$j++;
+									}
+									
+								} else {
+									$content_html .= $this->mondira_shortcode_fields( $name, $attr_option, $shortcode, $i );
+								}
 								$i++;
 							}
 						}	
