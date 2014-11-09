@@ -9,6 +9,99 @@
 * @author url http://www.codeatomic.com 
 * 
 */ 
+
+global $MondiraDefaultIconManager;
+if ( !class_exists( 'MondiraDefaultIconManager' ) ) {
+	class MondiraDefaultIconManager {
+		function __construct() {
+			add_action( 'admin_enqueue_scripts', array( $this, 'mondira_default_icon_manager_admin_scripts' ) );
+			add_action( 'admin_init', array( $this, 'atomic_shortcode_params' ) );
+		}
+		
+		public function mondira_get_default_icon_list_of_fonts() {
+			$fonts = array(
+				'Defaults' => array(
+					'folder' => 'Defaults',
+					'style' => 'Defaults.css',
+					'config' => 'charmap.php'
+				)
+			);			
+			return $fonts;
+		}
+		
+		function mondira_default_icon_manager_admin_scripts( $hook ) {
+			if ( $hook == 'post.php' || $hook == 'post-new.php' ) {
+				wp_enqueue_style( 'mondira-default-icon-manager-css', FRAMEWORK_ADMIN_RESOURCES_URI . '/fonts/Defaults/icon-manager.css' );
+				
+				$fonts = $this->mondira_get_default_icon_list_of_fonts();
+				if ( is_array( $fonts ) ) {
+					foreach ( $fonts as $font => $info ) {
+						$file_url = FRAMEWORK_ADMIN_RESOURCES_URI . '/fonts/' .$font . '/' .$info['style'];
+						wp_enqueue_style( 'mondira-icon-font-' . $font, $file_url );
+					}
+				}
+			}
+		}
+		
+		public function mondira_get_default_icon_manager_fonts() {
+			$fonts = $this->mondira_get_default_icon_list_of_fonts();
+			
+			$output = '<div class="preview-icon"><i class=""></i></div><input class="search-icon" type="text" placeholder="Search an icon..." />';
+			$output .= '<div id="smile_icon_search">';
+			$output .= '<ul class="icons-list smile_icon">';
+			foreach ( $fonts as $font => $info ) {
+				$icon_set = array();
+				$icons = array();
+				$file = FRAMEWORK_ADMIN_RESOURCES . '/fonts/' .$font . '/' .$info['config'];
+				include( $file );
+				if ( !empty( $icons ) ) {
+					$icon_set = array_merge( $icon_set, $icons );
+				}
+				
+				if ( $font == 'smt' ) {
+					$set_name = 'Default Icons';
+				} else {
+					$set_name = ucfirst( $font );
+				}
+				
+				if ( !empty( $icon_set ) ) {
+					$output .= '<p><strong>'.$set_name.'</strong></p>';
+					$output .= '<li title="no-icon" data-icons="none" data-icons-tag="none,blank" style="cursor: pointer;"></li>';
+					foreach ( $icon_set as $icons ) {
+						foreach ( $icons as $icon ) {
+							$output .= '<li title="'.$icon['class'].'" data-icons="'.$font.'-'.$icon['class'].'" data-icons-tag="'.$icon['tags'].'">';
+							$output .= '<i class="icon '.$font.'-'.$icon['class'].'"></i><label class="icon">'.$icon['class'].'</label></li>';
+						}
+					}
+				}
+			}
+			$output .'</ul>';
+			$output .= '<script type="text/javascript">
+					jQuery(document).ready(function(){
+						setTimeout(function() {
+							jQuery(".search-icon").focus();
+						}, 1000);
+						jQuery(".search-icon").keyup(function(){
+							var filter = jQuery(this).val(), count = 0;
+							jQuery(".icons-list li").each(function(){
+								if (jQuery(this).attr("data-icons-tag").search(new RegExp(filter, "i")) < 0) {
+									jQuery(this).fadeOut();
+								} else {
+									jQuery(this).show();
+									count++;
+								}
+							});
+						});
+					});
+			</script>';
+			$output .= '</div>';
+			return $output;
+		}
+		
+	}
+	$MondiraDefaultIconManager = new MondiraDefaultIconManager();
+}
+
 if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 	class MondiraThemeShortcodesGenerator {
         var $shortcodes = array();
@@ -173,6 +266,18 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 							$shortcode_field_html .= '<option value="'.$k.'">'.$v.'</option>';
 						}
 						$shortcode_field_html .= '</select>' . $postfix . ' '  . $desc . '</div>
+					</div>';
+					break;
+					
+				case 'icon':
+					global $MondiraDefaultIconManager;
+					$output = $MondiraDefaultIconManager->mondira_get_default_icon_manager_fonts();
+					
+					$shortcode_field_html .= '
+					<div class="mondira-shortcode-option mondira-shortcode-option-icon" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
+						<div class="label"><label for="shortcode-option-'.$name.'"><strong>'.$label.' </strong></label></div>
+						<div class="content container-icon">' . $suffix . '<input class="attr icon-input '.$class.'" type="text" data-attrname="'.$name.'" value="'.$value.'" />' . $postfix . ' ' . $desc . '</div>
+						'. $output .'
 					</div>';
 					break;
 					

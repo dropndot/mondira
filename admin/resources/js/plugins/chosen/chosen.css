@@ -200,6 +200,9 @@
   line-height: 25px;
   margin: 0px;
 }
+#mondira-shortcode-header .chosen-container .chosen-results .active-result {
+  line-height: 20px;
+}
 .chosen-container .chosen-results .highlighted {
   background-color: #0074a2;
   color: #fff;
@@ -225,6 +228,11 @@
   line-height: 25px;
   display: block!Important;
 }
+
+#mondira-shortcode-header .chosen-container .chosen-results .group-result {
+	padding: 0px 10px;
+}
+
 .chosen-container .chosen-results .group-option {
   padding-left: 15px;
 }

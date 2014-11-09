@@ -13,15 +13,16 @@
 ---------------------------------------------------------------------------------------
 */    
 var mondiraAdmin = {
-    themeGetNDisplayImage : function( attachment, target ){        
-        if( jQuery("#"+target+"_preview").size()>0 ){ 
-            var cssObj = {
+    themeGetNDisplayImage : function( attachment, target ){    
+		if( jQuery("#"+target+"_preview").size()>0 ){ 
+			var cssObj = {
               'background-color' : '#fff',
               'border' : '1px solid #CCC',
               'height' : '120px',
               'width' : '140px',
               'padding' : '5px',
-              'text-align' : 'center'
+              'text-align' : 'center',
+              'display' : 'block'
             }            
             jQuery("#"+target+"_preview").css(cssObj);
             jQuery("#"+target+"_preview").html('<img style="margin-top:44px;" src="'+ FRAMEWORK_ADMIN_RESOURCES_URI + '/images/ajax-loader.gif"/>');
@@ -201,7 +202,7 @@ jQuery(document).ready( function($) {
 				}
 			}
 			
-			$('#'+$fold_id).change(function(){
+			$(document).on('change', '#'+$fold_id, function() {
 				if ( typeof jQuery(this).val() == 'undefined' || jQuery(this).val() == '' ) {
 					if ( $fold_value == 'empty' ) {
 						$input_obj.parents("tr").show("slow");
@@ -288,6 +289,7 @@ jQuery(document).ready( function($) {
 	$('input, select, textarea').each(function(){
         var $input_obj = $(this);         
 		var $fold_str = $input_obj.data('fold');
+					
 		if ( typeof $fold_str == 'undefined' || $fold_str == '' ) {
 			
 		} else {
@@ -297,8 +299,9 @@ jQuery(document).ready( function($) {
 			//website_layout#top 
 			
 			var $fold_id = '';
-			var $fold_id_list = $fold_str.split('#')[0];
-			var $fold_value_list = $fold_str.split('#')[1];
+			var $split_arr = $fold_str.split('#');
+			var $fold_id_list = $split_arr[0];
+			var $fold_value_list = $split_arr[1];
 			
 			if ( $fold_id_list.split(',').length > 1 ) {
 				$fold_id_list.split(',').each(function(index){
@@ -649,6 +652,18 @@ jQuery(document).ready( function($) {
 		$('.shortcode-options').hide();
 		$('#options-'+$(this).val()).show();
     });
+
+	/*
+	---------------------------------------------------------------------------------------
+		Adding preview value for Icon Manager
+	---------------------------------------------------------------------------------------
+	*/
+    $(".icons-list li").click(function() {
+		$(this).attr("class","selected").siblings().removeAttr("class");
+		var icon = $(this).attr("data-icons");
+		$(this).parents('.mondira-shortcode-option').find('input.icon-input').val(icon);
+		$(this).parents('.mondira-shortcode-option').find('.preview-icon').html("<i class=\'"+icon+"\'></i>");
+	});
 	
 	/*
 	---------------------------------------------------------------------------------------
