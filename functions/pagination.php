@@ -127,7 +127,6 @@ if ( !function_exists('pagination_paged')) {
 */
 if ( !function_exists('mondira_pagejump') ) {
 	function mondira_pagejump($pages = '', $range = 4) {
-		
 		 $showitems = ($range * 2)+1; 
 		 global $paged;
 		 if ( empty($paged) ) $paged = 1;
@@ -138,8 +137,7 @@ if ( !function_exists('mondira_pagejump') ) {
 			 if(!$pages) {
 				 $pages = 1;
 			 }
-		 }  
-	 
+		 } 
 		 if ( 1 != $pages ) {
 			echo '<div class="post-navigation clr"><div class="alignleft">';
 			previous_posts_link( '&larr; ' . __('Newer Posts', 'mondira' ) );
@@ -147,7 +145,120 @@ if ( !function_exists('mondira_pagejump') ) {
 			next_posts_link( __('Older Posts', 'mondira' ) .' &rarr;' );
 			echo '</div></div>';
 		 }
-		 
 	}
+}
 
+
+/*
+*
+* Return the of next_post_link WordPress default function.
+* 
+* @Author: Jewel Ahmed
+* @Author Web: http://codeatomic.com
+* @Last Updated: 09 Nov, 2014
+*/
+if ( !function_exists( 'mondira_get_next_post_link' ) ) {
+	function mondira_get_next_post_link( $link, $title ) {
+		ob_start();
+		next_post_link( $link, $title );
+		$buffer = ob_get_contents();
+		ob_end_clean();
+		
+		return $buffer;
+	}
+}
+
+/*
+*
+* Return the of previous_post_link WordPress default function.
+* 
+* @Author: Jewel Ahmed
+* @Author Web: http://codeatomic.com
+* @Last Updated: 09 Nov, 2014
+*/
+if ( !function_exists( 'mondira_get_previous_post_link' ) ) {
+	function mondira_get_previous_post_link( $link, $title ) {
+		ob_start();
+		previous_post_link( $link, $title );
+		$buffer = ob_get_contents();
+		ob_end_clean();
+		
+		return $buffer;
+	}
+}
+
+/*
+*
+* Return the of previous_posts_link WordPress default function.
+* 
+* @Author: Jewel Ahmed
+* @Author Web: http://codeatomic.com
+* @Last Updated: 09 Nov, 2014
+*/
+if ( !function_exists( 'mondira_get_previous_posts_link' ) ) {
+	function mondira_get_previous_posts_link( $title ) {
+		ob_start();
+		previous_posts_link( $title );
+		$buffer = ob_get_contents();
+		ob_end_clean();
+		
+		return $buffer;
+	}
+}
+
+/*
+*
+* Return the of next_posts_link WordPress default function.
+* 
+* @Author: Jewel Ahmed
+* @Author Web: http://codeatomic.com
+* @Last Updated: 09 Nov, 2014
+*/
+if ( !function_exists( 'mondira_get_next_posts_link' ) ) {
+	function mondira_get_next_posts_link( $title ) {
+		ob_start();
+		next_posts_link( $title );
+		$buffer = ob_get_contents();
+		ob_end_clean();
+		
+		return $buffer;
+	}
+}
+
+/*
+*
+* Return the of previous_comments_link WordPress default function.
+* 
+* @Author: Jewel Ahmed
+* @Author Web: http://codeatomic.com
+* @Last Updated: 09 Nov, 2014
+*/
+if ( !function_exists( 'mondira_get_previous_comments_link' ) ) {
+	function mondira_get_previous_comments_link( $title ) {
+		ob_start();
+		previous_comments_link( $title );
+		$buffer = ob_get_contents();
+		ob_end_clean();
+		
+		return $buffer;
+	}
+}
+
+/*
+*
+* Return the of next_comments_link WordPress default function.
+* 
+* @Author: Jewel Ahmed
+* @Author Web: http://codeatomic.com
+* @Last Updated: 09 Nov, 2014
+*/
+if ( !function_exists( 'mondira_get_next_comments_link' ) ) {
+	function mondira_get_next_comments_link( $title ) {
+		ob_start();
+		next_comments_link( $title );
+		$buffer = ob_get_contents();
+		ob_end_clean();
+		
+		return $buffer;
+	}
 }

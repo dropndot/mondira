@@ -158,7 +158,7 @@ if ( !class_exists( 'MondiraThemeMetabox' ) ) {
         }
         
         function color($value=array()){
-            echo $this->html->formTableColor(array('name'=>$value['id'], 'value'=>$value['default'], 'data-fold'=>!empty($value['data-fold'])?$value['data-fold']:'', 'data-default-color'=>$value['data-default-color']));
+            echo $this->html->formTableColor(array('title'=>$value['title'], 'name'=>$value['id'], 'value'=>$value['default'], 'data-fold'=>!empty($value['data-fold'])?$value['data-fold']:'', 'data-default-color'=>$value['data-default-color']));
         }   
          
         function select($value=array()){

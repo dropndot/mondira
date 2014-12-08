@@ -81,7 +81,7 @@ if(!class_exists('Mondira')){
                     $post_type = $_REQUEST['post_type'];
                     $post_formats = apply_filters( 'mondira_post_formats_'.$post_type, $post_formats );  
                 } 
-                add_theme_support( 'post-formats', $post_formats );   
+				add_theme_support( 'post-formats', $post_formats );   
                 
                 add_theme_support('menus');
                 add_theme_support('automatic-feed-links');
