@@ -10,7 +10,99 @@
 * 
 */ 
 
-global $MondiraDefaultIconManager;
+global $MondiraDefaultIconManager, $MondiraDesignManager;
+if ( !class_exists( 'MondiraDesignManager' ) ) {
+	class MondiraDesignManager {
+		function __construct() {
+			
+		}
+		
+		public function mondira_css_design_manager( $unique_option_id ) {
+			ob_start();
+			?>
+			
+			<div class="clearfix mondira-css-design-attr">
+				<div class="mondira-css-editor">  
+					<div class="css-design-title">CSS Design</div>
+					<div class="css-margin">
+						<label>margin</label>
+						<input type="text" name="margin_top" data-name="margin-top" class="css-editor-top in_px skip-it" placeholder="-" data-attribute="margin" value="">
+						<input type="text" name="margin_right" data-name="margin-right" class="css-editor-right in_px skip-it" placeholder="-" data-attribute="margin" value="">
+						<input type="text" name="margin_bottom" data-name="margin-bottom" class="css-editor-bottom in_px skip-it" placeholder="-" data-attribute="margin" value="">
+						<input type="text" name="margin_left" data-name="margin-left" class="css-editor-left in_px skip-it" placeholder="-" data-attribute="margin" value="">      
+						<div class="css-border">
+							<label>border</label>
+							<input type="text" name="border_top_width" data-name="border-width-top" class="css-editor-top in_px skip-it" placeholder="-" data-attribute="border" value="">
+							<input type="text" name="border_right_width" data-name="border-width-right" class="css-editor-right in_px skip-it" placeholder="-" data-attribute="border" value="">
+							<input type="text" name="border_bottom_width" data-name="border-width-bottom" class="css-editor-bottom in_px skip-it" placeholder="-" data-attribute="border" value="">
+							<input type="text" name="border_left_width" data-name="border-width-left" class="css-editor-left in_px skip-it" placeholder="-" data-attribute="border" value="">          
+							<div class="css-padding">
+								<label>padding</label>
+								<input type="text" name="padding_top" data-name="padding-top" class="css-editor-top in_px skip-it" placeholder="-" data-attribute="padding" value="">
+								<input type="text" name="padding_right" data-name="padding-right" class="css-editor-right in_px skip-it" placeholder="-" data-attribute="padding" value="">
+								<input type="text" name="padding_bottom" data-name="padding-bottom" class="css-editor-bottom in_px skip-it" placeholder="-" data-attribute="padding" value="">
+								<input type="text" name="padding_left" data-name="padding-left" class="css-editor-left in_px skip-it" placeholder="-" data-attribute="padding" value="">              
+								<div class="css-content"><i></i></div>          
+							</div>      
+						</div>    
+					</div>
+				</div>
+				<div class="mondira-css-editor-content">
+				
+					<div class="css-editor-option clearfix">
+						<div class="css-editor-label clearfix"><label>Content Color</label></div>
+						<div class="css-editor-field"><input class="wp-color-picker skip-it" type="text" name="color" data-name="color" value="" /></div>
+					</div>
+				
+					<div class="css-editor-option clearfix">
+						<div class="css-editor-label clearfix"><label>Border</label></div>
+						<div class="css-editor-field"><input class="wp-color-picker skip-it" type="text" name="border-color" data-name="border-color" value="" /></div>
+					</div>
+				
+					<div class="css-editor-option clearfix">
+						<div class="css-editor-field clearfix">
+							<select name="border-style" data-name="border-style" class="css-content-border skip-it"><option value="">Theme defaults</option><option value="solid">Solid</option><option value="dotted">Dotted</option><option value="dashed">Dashed</option><option value="none">None</option><option value="hidden">Hidden</option><option value="double">Double</option><option value="groove">Groove</option><option value="ridge">Ridge</option><option value="inset">Inset</option><option value="outset">Outset</option><option value="initial">Initial</option><option value="inherit">Inherit</option></select>
+						</div>
+					</div>
+				
+					<div class="css-editor-option clearfix">
+						<div class="css-editor-label clearfix"><label>Background Color</label></div>
+						<div class="css-editor-field"><input class="wp-color-picker skip-it" type="text" name="background-color" data-name="background-color" value="" /></div>
+					</div>
+					
+					<?php 
+					$name = $unique_option_id . "_content_background";
+					?>
+					<div class="css-editor-option clearfix">
+						<div class="css-editor-field">
+							<input class="attr attach_file_input mondira-upload-input skip-it" type="text" id="<?php echo $name; ?>" name="background-image" data-name="background-image" value="" />
+							<div class="mondira-media-upload-button">
+								<a class="upload_image_button_latest button theme-upload-button clearfix" data-target="<?php echo $name; ?>" id="<?php echo $name; ?>_thickbox" href="media-upload.php?post_id=0&target=<?php echo $name; ?>&mondira_image_upload=1&type=file&TB_iframe=1&width=640&height=644">Upload Image</a>
+								<br class="clearfix" />
+								<div id="<?php echo $name; ?>_preview" class="mondira-media-preview clearfix"></div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="css-editor-option clearfix">
+						<div class="css-editor-field">
+							<select name="background-size"  data-name="background-size" class="css-content-background skip-it"><option value="">Theme defaults</option><option value="cover">Cover</option><option value="contain">Contain</option><option value="no-repeat">No Repeat</option><option value="repeat">Repeat</option></select>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			
+			<?php 
+			$buffer = ob_get_contents();
+			ob_end_clean();
+			
+			return $buffer;
+		}
+	}
+	$MondiraDesignManager = new MondiraDesignManager();
+}
+
 if ( !class_exists( 'MondiraDefaultIconManager' ) ) {
 	class MondiraDefaultIconManager {
 		function __construct() {
@@ -205,7 +297,7 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 							(isset($attr_option['def']) && !empty($attr_option['def'])) ? $def = $attr_option['def'] : $def = '';
 							 $shortcode_field_html .= '
 								<label for="shortcode-option-'.$shortcode.'-'.$name.'-'.$val.'">'.$title.'</label>
-								<input class="attr" type="radio" data-attrname="'.$name.'" name="'.$shortcode.'-'.$name.'" value="'.$val.'" id="shortcode-option-'.$shortcode.'-'.$name.'-'.$val.'"'. ( $val == $def ? ' checked="checked"':'').'>';
+								<input class="attr radio_input" type="radio" data-attrname="'.$name.'" name="'.$shortcode.'-'.$name.'" value="'.$val.'" id="shortcode-option-'.$shortcode.'-'.$name.'-'.$val.'"'. ( $val == $def ? ' checked="checked"':'').'>';
 						}
 						$shortcode_field_html .=  $postfix . ' ' . $desc . '</div>
 					</div>';
@@ -224,13 +316,13 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 						}
 						
 						if( !empty( $checkbox_value ) && !is_array( $checkbox_value ) ) {
-							$shortcode_field_html .= '<input type="checkbox" data-attrname="'.$name.'" value="'.$checkbox_value.'" class="skip-it input-checkbox-to-text ' . $name . '" id="' . $name . '" />';
+							$shortcode_field_html .= '<input type="checkbox" data-attrname="'.$name.'" value="'.$checkbox_value.'" class="skip-it input-checkbox-to-text checkbox_input ' . $name . '" id="' . $name . '" />';
 						} else if( !empty( $checkbox_value ) && is_array( $checkbox_value ) ) {
 							foreach( $checkbox_value as $k => $v ) {
-								$shortcode_field_html .= '<input type="checkbox" data-attrname="'.$name.'" value="'.$k.'" class="skip-it input-checkbox-to-text ' . $name . '" id="' . $name . '" /><span class="checkbox-label">' . $v . '</span>';
+								$shortcode_field_html .= '<input type="checkbox" data-attrname="'.$name.'" value="'.$k.'" class="skip-it input-checkbox-to-text checkbox_input ' . $name . '" id="' . $name . '" /><span class="checkbox-label">' . $v . '</span>';
 							}
 						}
-						$shortcode_field_html .='<input data-display="none" class="attr '.$class.'" type="text" data-attrname="'.$name.'" value="" id="checkbox-val-' . $name . '" />';
+						$shortcode_field_html .='<input data-display="none" class="attr checkbox_input '.$class.'" type="text" data-attrname="'.$name.'" value="" id="checkbox-val-' . $name . '" />';
 						
 						$shortcode_field_html .=  $postfix . ' ' . $desc. '</div>
 					</div>';
@@ -241,7 +333,7 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 					$shortcode_field_html .= '
 					<div class="mondira-shortcode-option" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
 						<div class="label"><label for="'.$name.'"><strong>'.$label.' </strong></label></div>
-						<div class="content container-select">' . $suffix . '<select data-attrname="'.$name.'" id="'.$name.'">';
+						<div class="content container-select">' . $suffix . '<select class="select_input dropdown_input" data-attrname="'.$name.'" id="'.$name.'">';
 						if ( !empty( $attr_option['values'] ) ) {
 							$values = $attr_option['values'];
 						} else if ( !empty( $attr_option['value'] ) ) {
@@ -260,7 +352,7 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 					$shortcode_field_html .= '
 					<div class="mondira-shortcode-option" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
 						<div class="label"><label for="'.$name.'"><strong>'.$label.' </strong></label></div>
-						<div class="content container-multi-select">' . $suffix . '<select data-attrname="'.$name.'" multiple="multiple" id="'.$name.'">';
+						<div class="content container-multi-select">' . $suffix . '<select class="multi-select_input" data-attrname="'.$name.'" multiple="multiple" id="'.$name.'">';
 						$values = $attr_option['values'];
 						foreach( $values as $k => $v ){
 							$shortcode_field_html .= '<option value="'.$k.'">'.$v.'</option>';
@@ -276,8 +368,19 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 					$shortcode_field_html .= '
 					<div class="mondira-shortcode-option mondira-shortcode-option-icon" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
 						<div class="label"><label for="shortcode-option-'.$name.'"><strong>'.$label.' </strong></label></div>
-						<div class="content container-icon">' . $suffix . '<input class="attr icon-input '.$class.'" type="text" data-attrname="'.$name.'" value="'.$value.'" />' . $postfix . ' ' . $desc . '</div>
+						<div class="content container-icon">' . $suffix . '<input class="attr icon_input icon-input '.$class.'" type="text" data-attrname="'.$name.'" value="'.$value.'" />' . $postfix . ' ' . $desc . '</div>
 						'. $output .'
+					</div>';
+					break;
+					
+				case 'css_design':
+					global $MondiraDesignManager;
+					$output = $MondiraDesignManager->mondira_css_design_manager( $unique_option_id );
+					
+					$shortcode_field_html .= '
+					<div class="mondira-shortcode-option mondira-shortcode-option-css-design" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
+						<div class="content container-css-design">' . $suffix . ' '. $output .' '. '<textarea class="textarea_input css_design_textarea" data-attrname="'.$name.'">'.$value.'</textarea>' . $postfix . ' ' . $desc . '</div>
+						
 					</div>';
 					break;
 					
@@ -293,7 +396,38 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 					$shortcode_field_html .= '
 					<div class="mondira-shortcode-option" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
 						<div class="label"><label for="shortcode-option-'.$name.'"><strong>'.$label.' </strong></label></div>
-						<div class="content container-textarea">' . $suffix . '<textarea data-attrname="'.$name.'">'.$textarea_value.'</textarea> ' . $postfix . ' '  . $desc . '</div>
+						<div class="content container-textarea">' . $suffix . '<textarea class="textarea_input" data-attrname="'.$name.'">'.$textarea_value.'</textarea> ' . $postfix . ' '  . $desc . '</div>
+					</div>';
+					break;
+						
+				case 'editor':
+					if( !empty( $attr_option['value'] ) ) {
+						$textarea_value = $attr_option['value'];
+					} else if( !empty( $attr_option['values'] ) ) {
+						$textarea_value = $attr_option['values'];
+					} else {
+						$textarea_value = '';
+					}
+					
+					
+					
+				
+					$settings = array(
+						'default_editor' => 'html',
+						'textarea_name' => $name.'-'.$unique_option_id,
+						'tinymce' => true,
+						'wpautop' => false,
+						'media_buttons' => true,
+						'editor_height' => 200
+					);
+					ob_start();
+					wp_editor( '', $name.'-'.$unique_option_id, $settings );
+					$output = ob_get_contents();
+					ob_end_clean();
+					
+					$shortcode_field_html .= '
+					<div class="mondira-shortcode-option" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
+						<div class="container-editor">' . $suffix . $output . $postfix . ' '  . $desc . '</div>
 					</div>';
 					break;
 						
@@ -302,7 +436,7 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 					$shortcode_field_html .= '
 					<div class="mondira-shortcode-option" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
 						<div class="label"><label for="shortcode-option-'.$name.'"><strong>'.$label.' </strong></label></div>
-						<div class="content container-color">' . $suffix . '<input class="attr wp-color-picker '.$class.'" type="text" data-attrname="'.$name.'" value="" />' . $postfix . ' '  . $desc . '</div>
+						<div class="content container-color">' . $suffix . '<input class="attr color_input colorpicker_input wp-color-picker '.$class.'" type="text" data-attrname="'.$name.'" value="" />' . $postfix . ' '  . $desc . '</div>
 					</div>';
 					break;
 				
@@ -310,7 +444,7 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 					$shortcode_field_html .= '
 					<div class="mondira-shortcode-option" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
 						<div class="label"><label for="shortcode-option-'.$name.'"><strong>'.$label.' </strong></label></div>
-						<div class="content container-number">' . $suffix . '<input class="attr '.$class.'" type="number" data-attrname="'.$name.'" value="'.$value.'" />' . $postfix . ' ' . $desc . '</div>
+						<div class="content container-number">' . $suffix . '<input class="attr number_input '.$class.'" type="number" data-attrname="'.$name.'" value="'.$value.'" />' . $postfix . ' ' . $desc . '</div>
 					</div>';
 					break;
 				
@@ -318,7 +452,7 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 					$shortcode_field_html .= '
 					<div class="mondira-shortcode-option" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
 					<div class="label"><label for="shortcode-option-'.$name.'"><strong>'.$label.' </strong></label></div>
-						<div class="content container-image">' . $suffix . '<input class="attr mondira-upload-input '.$class.'" type="text" id="'.$name.'" data-attrname="'.$name.'" value="'.$value.'" />' . $postfix;
+						<div class="content container-image">' . $suffix . '<input class="attr attach_image_input mondira-upload-input '.$class.'" type="text" id="'.$name.'" data-attrname="'.$name.'" value="'.$value.'" />' . $postfix;
 					$shortcode_field_html .= $desc;
 					$shortcode_field_html.= '
 						<br class="clearfix" />
@@ -335,7 +469,7 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 					$shortcode_field_html .= '
 					<div class="mondira-shortcode-option" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
 					<div class="label"><label for="shortcode-option-'.$name.'"><strong>'.$label.' </strong></label></div>
-						<div class="content container-image">' . $suffix . '<input class="attr mondira-upload-input '.$class.'" type="text" id="'.$name.'" data-attrname="'.$name.'" value="'.$value.'" />' . $postfix;
+						<div class="content container-image">' . $suffix . '<input class="attr attach_file_input mondira-upload-input '.$class.'" type="text" id="'.$name.'" data-attrname="'.$name.'" value="'.$value.'" />' . $postfix;
 					$shortcode_field_html .= $desc;
 					$shortcode_field_html.= '
 						<br class="clearfix" />
@@ -359,7 +493,7 @@ if ( !class_exists( 'MondiraThemeShortcodesGenerator' ) ) {
 					$shortcode_field_html .= '
 					<div class="mondira-shortcode-option" id="mondira-shortcode-option-'.$unique_option_id.'" data-shortcode="'.$shortcode.'" data-dependency_element="'.$dependency_element.'" data-dependency_is_empty="'.$dependency_is_empty.'" data-dependency_not_empty="'.$dependency_not_empty.'" data-dependency_values="'.$dependency_values.'" data-display="'.$display.'">
 						<div class="label"><label for="shortcode-option-'.$name.'"><strong>'.$label.' </strong></label></div>
-						<div class="content container-text">' . $suffix . '<input class="attr '.$class.'" type="text" data-attrname="'.$name.'" value="'.$text_value.'" />' . $postfix . ' '  . $desc . '</div>
+						<div class="content container-text">' . $suffix . '<input class="attr text_input textfield_input '.$class.'" type="text" data-attrname="'.$name.'" value="'.$text_value.'" />' . $postfix . ' '  . $desc . '</div>
 					</div>';
 					break;
 			}

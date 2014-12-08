@@ -52,6 +52,54 @@ var mondiraAdmin = {
     }
 }
 
+/*
+---------------------------------------------------------------------------------------
+    jQuery Initializing WP_Editor
+---------------------------------------------------------------------------------------
+*/
+jQuery(function () {
+    window.init_textarea_html = function($element) {
+
+        var qt, textfield_id = $element.attr("id");
+		
+		// Init Quicktag
+        if(_.isUndefined(tinyMCEPreInit.qtInit[textfield_id])) {
+			window.tinyMCEPreInit.qtInit[textfield_id] = _.extend({}, window.tinyMCEPreInit.qtInit[wpActiveEditor], {id: textfield_id})
+        }
+		
+        // Init tinymce
+        if(window.tinyMCEPreInit && window.tinyMCEPreInit.mceInit[wpActiveEditor]) {
+			window.tinyMCEPreInit.mceInit[textfield_id] = _.extend({}, window.tinyMCEPreInit.mceInit[wpActiveEditor], {
+		        resize: 'vertical',
+		        height: 200,
+		        id: textfield_id,
+		        setup: function (ed) {
+			       if (typeof(ed.on) != 'undefined') {
+				        ed.on('init', function (ed) {
+					        ed.target.focus();
+					        wpActiveEditor = textfield_id;
+				        });
+			        } else {
+				        ed.onInit.add(function (ed) {
+					        ed.focus();
+					        wpActiveEditor = textfield_id;
+				        });
+			        }
+		        }
+	        });
+			window.tinyMCEPreInit.mceInit[textfield_id].plugins =  window.tinyMCEPreInit.mceInit[textfield_id].plugins.replace(/,?wpfullscreen/, '');
+        }
+        
+		qt = quicktags( window.tinyMCEPreInit.qtInit[textfield_id] );
+        QTags._buttonsInit();
+        if(window.tinymce) {
+            window.switchEditors && window.switchEditors.go(textfield_id, 'tmce');
+            if(tinymce.majorVersion === "4") tinymce.execCommand( 'mceAddEditor', true, textfield_id );
+        }
+        vc_activeMce = textfield_id;
+	    wpActiveEditor = textfield_id;
+    };
+});
 
 /*
 ---------------------------------------------------------------------------------------
@@ -393,7 +441,16 @@ jQuery(document).ready( function($) {
 			},
 			type: 'inline',
 			removalDelay: 500
-	    }, 0 );   
+	    }, 0 ); 
+		
+		/*
+		var $id = $('#options-' + $('#mondira-shortcodes').val() ).find('.wp-editor-wrap').first().attr('id'); 
+		if ( $id ) {
+			id = $id.slice( 3, -5 );
+			//window.init_textarea_html( $('#'+id) );
+			window.wpActiveEditor = id; 
+		}
+		*/
 	} ); 
 	
 	
@@ -434,7 +491,9 @@ jQuery(document).ready( function($) {
 				---------------------------------------------------------------------------------------
 				*/
 				$(this).find('textarea:not(".skip-it")').each(function(){
-					if ( 'content' == $(this).attr('data-attrname') ) {
+					if ( $(this).hasClass( 'wp-editor-area' ) ) {
+						//no support for editor in nasted shortcodes
+					} else if ( 'content' == $(this).attr('data-attrname') ) {
 						inner_content = $(this).val();
 					} else {
 						code += ' ' + $(this).attr('data-attrname')+'="'+ $(this).val() +'"';	
@@ -473,8 +532,7 @@ jQuery(document).ready( function($) {
 					if ( $(this).hasClass('skip-it') ) {
 						
 					} else {
-						if( $(this).attr('type') == 'text' ){ code += ' '+ $(this).attr('data-attrname')+'="'+ $(this).val()+'"'; }
-						else { if($(this).attr('checked') == 'checked') code += ' '+ $(this).attr('data-attrname')+'="'+ $(this).val()+'"'; }
+						code += ' '+ $(this).attr('data-attrname')+'="'+ $(this).val()+'"';
 					}
 				});
 				
@@ -486,6 +544,68 @@ jQuery(document).ready( function($) {
 		
 		$('#shortcode-inner-content').html(code);
     }
+	
+	/*
+	---------------------------------------------------------------------------------------
+		Generating CSS for CSS Design Option
+	---------------------------------------------------------------------------------------
+	*/
+	function modira_generate_css( textarea, shortcode_name ) {
+		var $me = textarea; //The textarea where we are going to put the generated css
+		
+		var $css_str = '#mondira_css_id_' +  $.now() + ' {';
+		var $css = '';
+		var $field_name = '';
+		$('#options-'+shortcode_name+' .mondira-css-design-attr input').each(function(){
+			$field_name = $(this).data('name');
+			$field_value = $(this).val();
+			if ( typeof $field_value == 'undefined' || $field_value == '' || typeof $field_name == 'undefined' || $field_name == '') {
+									
+			} else if ( $field_name == 'background-image' ) {
+				$css+=' ' + $field_name + ':url(' + $field_value + ');';
+			} else if ( $field_name == 'background-size' ) {
+				if ( $field_value == 'no-repeat' ) {
+					$css+=' background-repeat:' + $field_value + ';';
+				} else if ( $field_value == 'repeat' ) {
+					$css+=' background-repeat:' + $field_value + ';';
+				} else if ( $field_value == 'cover' ) {
+					$css+=' background-size:' + $field_value + ';';
+				} else if ( $field_value == 'certain' ) {
+					$css+=' background-size:' + $field_value + ';';
+				} else {
+					$css+=' background-size:' + $field_value + ';';
+				}
+				
+			} else {
+				if ( $(this).hasClass('in_px') ) {
+					$css+=' ' + $field_name + ':' + $field_value + 'px !important;';
+				} else {
+					$css+=' ' + $field_name + ':' + $field_value + ' !important;';
+				}
+			}
+		});		
+		
+		$('#options-'+shortcode_name+' .mondira-css-design-attr select').each(function(){
+			$field_name = $(this).data('name');
+			$field_value = $(this).val();
+			if ( typeof $field_value == 'undefined' || $field_value == '' || typeof $field_name == 'undefined' || $field_name == '') {
+									
+			} else if ( $field_name == 'background-image' ) {
+				$css+=' ' + $field_name + ':url(' + $field_value + ');';
+			} else {
+				$css+=' ' + $field_name + ':' + $field_value + ';';
+			}
+		});		
+		
+		if ( $css != "" ) {
+			$css_str+=$css;
+			$css_str+='}';
+		} else {
+			$css_str = '';
+		}
+		
+		$($me).val( $css_str );
+	}
 	
 	/*
 	---------------------------------------------------------------------------------------
@@ -552,8 +672,12 @@ jQuery(document).ready( function($) {
 			if ( $(this).parents('.nested_shortcode').length > 0 ) {
 				
 			 } else {
-			
-				if ( 'content' == $(this).attr('data-attrname') ) {
+				if ( $(this).hasClass( 'css_design_textarea' ) ) {
+					modira_generate_css( this, shortcode_name );
+					code += ' ' + $(this).attr('data-attrname')+'="'+ $(this).val() +'"';	
+				} else if ( $(this).hasClass( 'wp-editor-area' ) ) {
+					$( '#shortcode-inner-content' ).html( $(this).val() );
+				} else if ( 'content' == $(this).attr('data-attrname') ) {
 					$( '#shortcode-inner-content' ).html( $(this).val() );
 				} else {
 					code += ' ' + $(this).attr('data-attrname')+'="'+ $(this).val() +'"';	
@@ -610,8 +734,7 @@ jQuery(document).ready( function($) {
 				if ( $(this).hasClass('skip-it') ) {
 					
 				} else {
-					if( $(this).attr('type') == 'text' ){ code += ' '+ $(this).attr('data-attrname')+'="'+ $(this).val()+'"'; }
-					else { if($(this).attr('checked') == 'checked') code += ' '+ $(this).attr('data-attrname')+'="'+ $(this).val()+'"'; }
+					code += ' '+ $(this).attr('data-attrname')+'="'+ $(this).val()+'"';
 				}
 				
 			}
@@ -637,10 +760,26 @@ jQuery(document).ready( function($) {
 	$('#mondira-insert-shortcode').click(function(){
     	generate_shortcode( '', 'yes' );
 		var $shortcode_string = $('#shortcode-opening-tag').text() + $('#shortcode-inner-content').text() + $('#shortcode-closing-tag').text() ;
-		window.wp.media.editor.insert( $shortcode_string );
 		$('#shortcode-opening-tag, #shortcode-inner-content, #shortcode-closing-tag').text( '' );
+		
+		window.wp.media.editor.insert( $shortcode_string );
 		$.magnificPopup.close();
 		return false;
+		
+		//https://core.trac.wordpress.org/attachment/ticket/27210/27210.diff
+		/*var id = $('.wp-editor-wrap').first().attr('id'); 
+		if ( id ) { 
+			window.wpActiveEditor = id.slice( 3, -5 ); 
+		}*/ 
+		
+		/*var previous_tinymce_activeEditor_id = tinymce.activeEditor.id;
+		if ( $('#content').length > 0 ) {
+			window.wpActiveEditor = 'content';
+			window.wp.media.editor.insert( $shortcode_string );
+			window.wpActiveEditor = previous_tinymce_activeEditor_id;
+		}
+		$.magnificPopup.close();
+		return false;*/
     });
 
 	/*
@@ -648,9 +787,16 @@ jQuery(document).ready( function($) {
 		Hiding and Showing shortcode options / attributes on the fly!
 	---------------------------------------------------------------------------------------
 	*/
-    $('#mondira-shortcodes').change(function() {
+	 ;
+	$('#mondira-shortcodes').change(function() {
 		$('.shortcode-options').hide();
 		$('#options-'+$(this).val()).show();
+		var id = $('#options-'+$(this).val()).find('.wp-editor-wrap').first().attr('id'); 
+		if ( id ) { 
+			$id = id.slice( 3, -5 );
+			//window.init_textarea_html( $('#' + $id) );
+			window.wpActiveEditor = $id; 
+		}
     });
 
 	/*
@@ -738,7 +884,7 @@ jQuery(document).ready( function($) {
 				}
 			});
 			
-			$( '#options-' + $shortcode ).find( '.mondira-shortcode-option textarea, .mondira-shortcode-option input:text' ).each(function(){
+			$( '#options-' + $shortcode ).find( '.mondira-shortcode-option textarea, .mondira-shortcode-option input.number_input, .mondira-shortcode-option input:text' ).each(function(){
 				var $ashortcode = $shortcode;
 				var $adependency_element = $dependency_element;
 				var $adependency_is_empty = $dependency_is_empty;

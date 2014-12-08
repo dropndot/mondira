@@ -309,6 +309,15 @@ textarea.regular-text {
     min-height: 150px;
     margin-bottom: 5px;
 }  
+
+.container-editor textarea {
+	min-height: 200px;
+}
+
+.container-editor a.mondira-shortcode-generator {
+	display: none;
+}
+
 .medium{
     width:277px;
     float: left;
@@ -781,11 +790,15 @@ body .button.mondira-shortcode-generator:hover {
 }
 
 .mfp-zoom-in {
-	z-index: 999999 !important;
+	z-index: 99999 !important;
 }
 
 body .media-modal {
 	z-index: 9999999 !important;
+}
+
+.mce-fullscreen {
+	margin-top: 32px !important;
 }
 
 .mfp-close-btn-in .mfp-close {
@@ -850,4 +863,151 @@ pre#css {
 	float: right;
 	padding: 5px 20px;
 	margin: 0px 5px !important;
+}
+
+
+/*
+-----------------------------------------------------------------------------------
+    Theme General Shortcode WP Editor CSS Design CSS
+-----------------------------------------------------------------------------------
+*/
+#mondira-shortcode-generator div.container-css-design {
+	width: 100%;
+	display: block;
+}
+
+.mondira-css-design-attr {
+	display: block;
+	overflow: hidden;
+	border: 0px solid #F00;
+	min-height: 200px;
+	width: 100%;
+	margin-bottom: 20px;
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-o-box-sizing: border-box;
+}
+
+.css-design-title {
+	display: block;
+	font-weight: bold;
+	margin: 0px 0px 10px 0px !important;
+}
+
+.mondira-css-editor {
+	width: 340px;
+	float: left;
+}
+
+.mondira-css-editor * {
+	margin: 44px;
+	position: relative;
+	outline: 0 !important;
+}
+
+.mondira-css-editor label {
+	position: absolute;
+	font-size: 9px;
+	line-height: 9px;
+	top: 6px;
+	left: 5px;
+	color: #2C2C2C;
+	margin: 0;
+	padding: 0;
+}
+
+.mondira-css-editor input {
+	position: absolute;
+	text-align: center;
+	padding: 3px 0;
+	height: 24px !important;
+	width: 34px !important;
+	margin: 0;
+	border: 1px solid #bdbdbd;
+	font-size: 11px;
+	line-height: 11px;
+	background-color: #fff;
+	color: #333;
+}
+
+.mondira-css-editor input.css-editor-top {
+	top: 11px;
+	left: 50%;
+	margin-left: -17px;
+}
+
+.mondira-css-editor input.css-editor-right {
+	top: 50%;
+	right: 5px;
+	margin-top: -12px;
+}
+
+.mondira-css-editor input.css-editor-bottom {
+	bottom: 11px;
+	left: 50%;
+	margin-left: -17px;
+}
+
+.mondira-css-editor input.css-editor-left {
+	top: 50%;
+	left: 5px;
+	margin-top: -12px;
+}
+
+.css-margin {
+	border: 1px dashed #bababa;
+	margin: 1px;
+}
+
+.css-border {
+	border: 1px solid #bababa;
+	background: #f2f2f2;
+}
+
+.css-padding {
+	border: 1px solid #bababa;
+	background: #e7e7e7;
+}
+
+.css-content {
+	border: 1px solid #bababa;
+	height: 50px;
+	padding: 0px;
+	text-align: center;
+	font-size: 10px;
+	line-height: 11px;
+	box-sizing: border-box;
+}
+
+.mondira-css-editor-content {
+	width: 300px;
+	float: right;
+	display: block;
+	min-height: 200px;
+}
+
+.css-editor-option {
+	display: block;
+	overflow: hidden;
+	clear: both;
+	margin-bottom: 10px;
+}
+
+.css-editor-field input {
+	max-width: 95%;
+}
+
+.css-editor-field .mondira-media-upload-button {
+	display: block;
+	margin-bottom: 10px;
+	overflow: hidden;
+}
+
+.css-editor-label {
+	margin-bottom: 10px;
+}
+
+.css_design_textarea {
+	display: none;
 }
