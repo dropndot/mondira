@@ -233,13 +233,27 @@ if(!class_exists('MondiraThemeHelper')){
                 } else {
                     if(!empty($attr['empty']))
                         $output.= '<option value="">'.$attr['empty'].'</option>';        
-                    foreach($attr['options'] as $key=>$value)    {
+                    foreach($attr['options'] as $key=>$value) {
                         if(!empty($attr['multiple']) && in_array($key, $value_arr)){
                             $output.= '<option value="'.$key.'" selected="selected">'.$value.'</option>';    
                         } else if(!empty($attr['selected']) && $key==$attr['selected']){
                             $output.= '<option value="'.$key.'" selected="selected">'.$value.'</option>';    
                         } else {
-                            $output.= '<option value="'.$key.'">'.$value.'</option>';        
+							if ( is_array( $value ) && !empty( $value['title'] ) ) { //Option Group Found!
+								$output.= '<optgroup label="'.$value['title'].'">';
+								if ( !empty( $value['options'] ) && is_array( $value['options'] ) ) {
+									foreach( $value['options'] as $k=>$v ) {
+										if(!empty($attr['selected']) && $key.'-'.$k==$attr['selected']){
+											$output.= '<option value="'.$key.'-'.$k.'" selected="selected">'.$v.'</option>';    
+										} else {
+											$output.= '<option value="'.$key.'-'.$k.'">'.$v.'</option>';        
+										}
+									}
+								}
+								$output.= '</optgroup>'; 
+							} else {
+								$output.= '<option value="'.$key.'">'.$value.'</option>';        
+							}
                         }
                         $output.="\n";
                     }    

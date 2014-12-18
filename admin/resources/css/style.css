@@ -1011,3 +1011,144 @@ pre#css {
 .css_design_textarea {
 	display: none;
 }
+
+.mondira-status,
+.mondira-priority {
+	padding: 2px 5px;
+	border-radius: 2px;
+}
+
+.mondira-priority-normal {
+	background: #dedede;
+}
+.mondira-priority-medium {
+	background: #54E4B8;
+	color: #fff;
+}
+.mondira-priority-high {
+	background: #E454AB;
+	color: #fff;
+}
+
+.mondira-status-open {
+	background: #dedede;
+}
+.mondira-status-solved {
+	background: #54E4B8;
+	color: #fff;
+}
+.mondira-status-closed {
+	background: #E454AB;
+	color: #fff;
+}
+
+/*
+-----------------------------------------------------------------------------------
+    Admin Theme Settings Accordion CSS
+-----------------------------------------------------------------------------------
+*/
+.mondira-theme-settings-accordion {
+	display: block;
+	overflow: hidden;
+	margin-bottom: 20px;
+	background: #f9f9f9;
+}
+
+.mondira-theme-settings-accordion h3 {
+	background: #0074A2;
+	color: #fff;
+	padding: 10px 20px;
+	text-align: left;
+	position: relative;
+	margin-bottom: 0px !important;
+}
+
+.mondira-theme-settings-accordion h3 a.acc-close,
+.mondira-theme-settings-accordion h3 a.acc-open {
+	color: #0074A2;
+	background: #fff;
+	padding: 10px;
+	text-align: center;
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	min-width: 50px;
+	text-transform: uppercase;
+	border: 1px dotted #0074A2;
+	text-decoration: none;
+}
+
+.mondira-theme-settings-accordion-inner {
+	padding: 20px;
+	padding-top: 30px;
+	display: none;
+}
+
+
+/*
+-----------------------------------------------------------------------------------
+    Admin post submit meta box css
+-----------------------------------------------------------------------------------
+*/
+.mondira-side-meta-box {
+	margin: 0px !important;
+}
+.mondira-side-meta-box .wide {
+	display: block;
+	overflow: hidden;
+	margin: 0;
+	padding: 0px 5px 3px 5px;
+	clear: both;
+	border-bottom: 1px solid #eee;
+}
+.mondira-side-meta-box .wide select.fullwidth-select {
+	width: 99%;
+}
+.mondira-side-meta-box .wide .button {
+	float: right;
+}
+.mondira-side-meta-box .mondira-save-post {
+	display: block;
+	padding-top: 10px;
+}
+.mondira-side-meta-box .wide #delete-action {
+	margin-left: 2px;
+}
+.mondira-side-meta-box .wide .mfr {
+	float: right;
+	text-align: right;
+}
+.mondira-side-meta-box .wide p {
+	margin: 3px;
+}
+.mondira-side-meta-box .wide .label {
+	font-weight: bold;
+}
+.mondira-side-meta-box .wide .mw100 {
+	max-width: 90px;
+}
+.mondira-side-meta-box .wide:last-child {
+	border: 0px;
+}
+.mondira-side-meta-box .mondira_order_total,
+.mondira-side-meta-box .mondira-invoice-label {
+	font-size: 15px;
+	text-align: right;
+	font-weight: bold;
+}
+
+.mondira-side-meta-box .order-total-update-notice p,
+.mondira-side-meta-box .order-date-update-notice p {
+	font-size: 12px;
+	text-align: center;
+}
+
+.mondira-side-meta-box .order-total-update-notice p em,
+.mondira-side-meta-box .order-date-update-notice p em { 
+	font-weight: bold;
+}
+
+
+#orders-items .chosen-container {
+	max-width: 500px;
+}

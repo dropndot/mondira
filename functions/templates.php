@@ -68,18 +68,3 @@ if(!function_exists('mondira_get_post_templates')) {
         return $post_templates;
     }  
 }    
-
-if ( !function_exists( 'mondira_is_portfolio_template' ) ) {
-    function mondira_is_portfolio_template () {
-        if ( is_page_template( 'templates/template-portfolio1.php' ) ) {
-            return true;
-        } else if ( is_page_template( 'templates/template-portfolio2.php' ) ) {
-            return true;
-        } else if ( is_page_template( 'templates/template-portfolio3.php' ) ) {
-            return true;
-        } else if ( is_page_template( 'templates/template-portfolio4.php' ) ) {
-            return true;
-        }           
-        return false;
-    }
-}
