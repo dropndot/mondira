@@ -103,6 +103,68 @@ jQuery(function () {
 
 /*
 ---------------------------------------------------------------------------------------
+    Theme settings accordion JS
+    @Since Version 1.0
+---------------------------------------------------------------------------------------
+*/
+function set_accordion_cookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+d.toUTCString();
+    document.cookie = cname + "=" + cvalue + "; " + expires;
+}
+function get_accordion_cookie(cname) {
+    var name = cname + "=";
+    var ca = document.cookie.split(';');
+    for(var i=0; i<ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0)==' ') c = c.substring(1);
+        if (c.indexOf(name) != -1) return c.substring(name.length,c.length);
+    }
+    return "";
+}
+function mondira_theme_settings_accordion_initialization(){
+	if ( jQuery('.mondira-theme-settings-accordion').length > 0 ) {
+		var i = 1;
+		var cv = '';
+		var $this = '';
+		jQuery('.mondira-theme-settings-accordion').each(function(){
+		
+			jQuery(this).find('> h3').append('<a data-open-id="acc-open-'+i+'" data-id="acc-close-'+i+'" href="#" class="acc-close">Close</a><a data-id="acc-open-'+i+'" href="#" class="acc-open">Open</a>');
+			
+			cv = get_accordion_cookie('mondira-acc-open-' + i );
+			
+			if ( cv == 'open' ) {
+				$this = jQuery(this).find('> h3').find('a.acc-open');
+				
+				$this.hide();
+				$this.parent('h3').find('a.acc-close').show();
+				$this.parents('.mondira-theme-settings-accordion').find('.mondira-theme-settings-accordion-inner').show();
+				set_accordion_cookie( 'mondira-' + $this.data('id'), 'open', 1 );
+				
+			}
+			
+			i++;
+		});
+		jQuery('.mondira-theme-settings-accordion').find('> h3 > a').on('click', function(){
+			if ( jQuery(this).hasClass('acc-close') ) {
+				jQuery(this).hide();
+				jQuery(this).parent('h3').find('a.acc-open').show();
+				jQuery(this).parents('.mondira-theme-settings-accordion').find('.mondira-theme-settings-accordion-inner').hide();
+				set_accordion_cookie( 'mondira-' + jQuery(this).data('open-id'), '', 1 );
+			} else {
+				jQuery(this).hide();
+				jQuery(this).parent('h3').find('a.acc-close').show();
+				jQuery(this).parents('.mondira-theme-settings-accordion').find('.mondira-theme-settings-accordion-inner').show();
+				set_accordion_cookie( 'mondira-' + jQuery(this).data('id'), 'open', 1 );
+			}
+			return false;
+		});
+	}
+}
+
+/*
+---------------------------------------------------------------------------------------
     Framework Input field JS Initialization
     @Since Version 1.0
 ---------------------------------------------------------------------------------------
@@ -115,6 +177,13 @@ jQuery(document).ready( function($) {
 	---------------------------------------------------------------------------------------
 	*/ 
     creatTabForMondiraDocumentation(); 
+	/*
+	---------------------------------------------------------------------------------------
+		Theme settings accordion Init
+		@Since Version 1.0
+	---------------------------------------------------------------------------------------
+	*/ 
+    mondira_theme_settings_accordion_initialization(); 
 	
 	/*
 	---------------------------------------------------------------------------------------
@@ -162,7 +231,7 @@ jQuery(document).ready( function($) {
 	*/ 
 	$(function(){
         var pickerOpts = {
-			appendText: "mm/dd/yyyy",
+			dateFormat : "yy-mm-dd",
 			defaultDate: "+5",
 			showOtherMonths: true
         };

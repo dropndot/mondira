@@ -69,7 +69,14 @@ if ( !class_exists( 'MondiraThemeMetabox' ) ) {
                     if (isset($_POST[$slug . $option['id']])) {
                         switch ($option['type']) {
                             case 'select_multi':              
-                                $value = implode( ',', $_POST[ $slug . $option['id'] ] );
+                                //$value = implode( ',', $_POST[ $slug . $option['id'] ] );
+								$tmp = array();
+								foreach( $_POST[ $slug . $option['id'] ] as $k => $v ){
+									foreach( $v as $index => $values ) {
+										$tmp[] = $values;
+									}
+								}
+								$value = implode( ',', $tmp );
                                 break;
                             case 'select':
                                 if(is_array($_POST[$slug . $option['id']])){
@@ -141,8 +148,11 @@ if ( !class_exists( 'MondiraThemeMetabox' ) ) {
         }
         
         function dated($value=array()) {
+			wp_enqueue_script( 'jquery-ui-datepicker' );
+			wp_enqueue_style( 'mondira-datepicker-admin-ui-css','http://ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/themes/base/jquery-ui.css',false,"1.9.0",false);
+
             //wp_enqueue_style('jquery-ui-style', 'http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/smoothness/jquery-ui.css');
-            echo $this->html->formTableInput(array('title'=>$value['title'], 'name'=>$value['id'], 'value'=>$value['default'], 'data-fold'=>!empty($value['data-fold'])?$value['data-fold']:'', 'type'=>'text', 'id'=>$value['id'], 'class'=>'datepickerx', 'avoid_br'=>!empty($value['avoid_br'])?$value['avoid_br']:'no'), $description = $value['desc']);
+            echo $this->html->formTableInput(array('title'=>$value['title'], 'name'=>$value['id'], 'value'=>$value['default'], 'data-fold'=>!empty($value['data-fold'])?$value['data-fold']:'', 'type'=>'text', 'id'=>$value['id'], 'class'=>'datepicker', 'avoid_br'=>!empty($value['avoid_br'])?$value['avoid_br']:'no'), $description = $value['desc']);
         }
         
         function textarea($value=array()) {
@@ -249,7 +259,7 @@ if ( !class_exists( 'MondiraThemeMetabox' ) ) {
                     $select_box = wp_dropdown_users( $args );
                     echo $this->html->formTableSelect(array('field'=>$select_box, 'class'=>!empty($value['class'])?$value['class']:'', 'title'=>$value['title'], 'multiple'=>'multiple', 'name'=>$value['id'].'[]', 'id'=>$value['id'], 'selected'=>$value['default']), $description=$value['desc']);    
                 } else {
-                    echo $this->html->formTableSelect(array('options'=>$this->get_wpdb_options($value['source'], $value['post_type']), 'class'=>!empty($value['class'])?$value['class']:'', 'title'=>$value['title'], 'multiple'=>'multiple', 'empty'=>'Please select...', 'name'=>$value['id'].'[]', 'id'=>$value['id'], 'data-fold'=>!empty($value['data-fold'])?$value['data-fold']:'', 'selected'=>$value['default']), $description=$value['desc']);    
+					echo $this->html->formTableSelect(array('options'=>$this->get_wpdb_options($value['source'], $value['post_type']), 'class'=>!empty($value['class'])?$value['class']:'', 'title'=>$value['title'], 'multiple'=>'multiple', 'empty'=>'Please select...', 'name'=>$value['id'].'[]', 'id'=>$value['id'], 'data-fold'=>!empty($value['data-fold'])?$value['data-fold']:'', 'selected'=>$value['default']), $description=$value['desc']);    
                 }
                 
             } else {
