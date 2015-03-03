@@ -9,6 +9,7 @@
 * @author url http://www.codeatomic.com 
 * 
 */
+
 if(!class_exists('MondiraThemeSettingsGenerator')){
     class MondiraThemeSettingsGenerator {
 	    var $title;
@@ -218,6 +219,8 @@ if(!class_exists('MondiraThemeSettingsGenerator')){
            
             if(file_exists(THEME_OPTIONS.'/'.$section.'.php'))
                 include THEME_OPTIONS.'/'.$section.'.php';
+            else if(file_exists(CHILD_THEME_OPTIONS.'/'.$section.'.php'))
+                include CHILD_THEME_OPTIONS.'/'.$section.'.php';
             else if(file_exists(FRAMEWORK_ADMIN_OPTIONS.'/'.$section.'.php'))
 		        include FRAMEWORK_ADMIN_OPTIONS.'/'.$section.'.php';
             

@@ -2,13 +2,19 @@
 /**
 * Initial contstants for mondira
 *
-* @package Wordpress
-* @subpackage Mondira
-* @version 1.0
+* @since version 1.0
+* @last modified 28 Feb, 2015
+* @author Jewel Ahmed<tojibon@gmail.com>
+* @author url http://www.codeatomic.com 
 */
-    
+    define('CHILD_THEME_DIR', get_stylesheet_directory());
+
     define('THEME_OPTIONS', THEME_DIR . '/options');
+    define('CHILD_THEME_OPTIONS', CHILD_THEME_DIR . '/options');
+
     define('THEME_DOCS', THEME_DIR . '/docs');
+    define('CHILD_THEME_DOCS', CHILD_THEME_DIR . '/docs');
+
     define('FRAMEWORK_GENERAL_FUNCTIONS', THEME_FRAMEWORK . '/functions'); //Used
     define('FRAMEWORK_ADMIN', THEME_FRAMEWORK . '/admin');
     define('FRAMEWORK_ADMIN_URI', THEME_FRAMEWORK_URI . '/admin');
