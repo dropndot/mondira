@@ -8,7 +8,8 @@
 * @author Jewel Ahmed<tojibon@gmail.com>
 * @author url http://www.codeatomic.com 
 * 
-*/ 
+*/
+
 if ( !class_exists( 'MondiraThemeMetabox' ) ) {
     class MondiraThemeMetabox extends MondiraThemeHelper {
         var $config;

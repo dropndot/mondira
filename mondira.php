@@ -2,10 +2,10 @@
 /**
 * Initial class for mondira
 *
-* @package Wordpress
-* @subpackage Mondira
-* @version 1.0
-* @last updated 18 Apr, 2014
+* @since version 1.0
+* @last modified 28 Feb, 2015
+* @author Jewel Ahmed<tojibon@gmail.com>
+* @author url http://www.codeatomic.com 
 */
 if(!class_exists('Mondira')){
     class Mondira {

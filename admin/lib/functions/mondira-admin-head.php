@@ -1,4 +1,15 @@
-<?php        
+<?php    
+/*
+* 
+* General filters for admin usages
+* 
+* @since version 1.0
+* @last modified 28 Feb, 2015
+* @author Jewel Ahmed<tojibon@gmail.com>
+* @author url http://www.codeatomic.com 
+* 
+*/
+
 if (!function_exists('mondira_admin_head')) { 
     function mondira_admin_head() {
         ?>

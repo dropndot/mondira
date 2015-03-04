@@ -1,9 +1,14 @@
 <?php 
 /**
-* @package WordPress
-* @subpackage Mondira
-* @version 1.0
+*
+* General template function file using by Mondira themes.
+*
+* @since version 1.0
+* @last modified 28 Feb, 2015
+* @author Jewel Ahmed<tojibon@gmail.com>
+* @author url http://www.codeatomic.com 
 */
+
 if(!function_exists('mondira_get_permalink')) {
     function mondira_get_permalink($link, $default=''){
         if(!empty($link)){

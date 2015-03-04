@@ -1,4 +1,15 @@
 <?php
+/*
+* 
+* This Class is to genrate the documentation page
+* 
+* @since version 1.0
+* @last modified 28 Feb, 2015
+* @author Jewel Ahmed<tojibon@gmail.com>
+* @author url http://www.codeatomic.com 
+* 
+*/
+
 if(!class_exists('MondiraThemeDocsGenerator')){
     class MondiraThemeDocsGenerator {
 	    var $title;
@@ -34,6 +45,8 @@ if(!class_exists('MondiraThemeDocsGenerator')){
 		    echo '<div id="'.$section.'" class="block">';
             if(file_exists(THEME_DOCS.'/'.$section.'.php'))
                 include THEME_DOCS.'/'.$section.'.php';
+            else if(file_exists(CHILD_THEME_DOCS.'/'.$section.'.php'))
+                include CHILD_THEME_DOCS.'/'.$section.'.php';
             else if(file_exists(FRAMEWORK_ADMIN_DOCS.'/'.$section.'.php'))
 		        include FRAMEWORK_ADMIN_DOCS.'/'.$section.'.php';
 		    echo '<div class="clear"></div>';

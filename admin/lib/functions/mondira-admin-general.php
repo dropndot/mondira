@@ -1,5 +1,16 @@
 <?php
 /*
+* 
+* General functions for admin usages
+* 
+* @since version 1.0
+* @last modified 28 Feb, 2015
+* @author Jewel Ahmed<tojibon@gmail.com>
+* @author url http://www.codeatomic.com 
+* 
+*/
+
+/*
 * @return boolean true if it is option or settings page of mondira
 */
 if (!function_exists('is_on_options_interface')) {

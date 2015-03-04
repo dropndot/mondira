@@ -260,6 +260,9 @@ if(!class_exists('MondiraThemeHelper')){
                 }
                 
                 
+            } else {
+                 if(!empty($attr['empty']))
+                        $output.= '<option value="">'.$attr['empty'].'</option>';      
             }
             
             $output.="\n";
